@@ -5,14 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rezeptify
+namespace Rezeptify;
+
+public class VMResolver
 {
-    internal class VMResolver
+    public static Type Resolve(ViewModelBase vm)
     {
-        public Type Resolve(ViewModelBase vm)
-        {
-            if (vm.GetType() == typeof(StartVM)) return typeof(StartPage);
-            throw new Exception("Keine Page für dieses VM registriert!");
-        }
+        if (vm.GetType() == typeof(StartVM)) return typeof(StartPage);
+        throw new Exception("Keine Page für dieses VM registriert!");
     }
 }

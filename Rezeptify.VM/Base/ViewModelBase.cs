@@ -19,7 +19,7 @@ public class ViewModelBase : INotifyPropertyChanged
     } 
     #endregion
 
-    internal readonly ViewManager? _viewManager;
+    internal readonly IViewManager? _viewManager;
 
     public ViewModelBase()
     {

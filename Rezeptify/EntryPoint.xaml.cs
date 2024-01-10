@@ -15,6 +15,8 @@ namespace Rezeptify
 
                 LoadComponents();
                 var vm = new StartVM();
+                var viewManager = Components.GetService<IViewManager>();
+                viewManager.Show(vm);
             }
             catch (Exception ex)
             {
@@ -24,7 +26,11 @@ namespace Rezeptify
 
         private void LoadComponents()
         {
-            //Components.RegisterService<IViewManager,new ViewManager()>();
+
+            var dgt = new ViewModelResolver(VMResolver.Resolve);
+            var shell = (Shell)App.Current!.MainPage;
+            var viewManager = new ViewManager(dgt, shell);
+            Components.RegisterService(typeof(IViewManager),viewManager);
         }
     }
 }
