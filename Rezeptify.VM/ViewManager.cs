@@ -67,7 +67,7 @@ public class ViewManager : IViewManager
     public async void Show(object vm)
     {
         var targetIndex = FindBackStackIndex((ViewModelBase)vm, _rootPage); //Ist die Seite die geöffnet werden soll schon im NavigationStack?
-        if (targetIndex != -1) //Nein -> Seite neu öffnen
+        if (targetIndex == -1) //Nein -> Seite neu öffnen
         {
             var type = _Resolve((ViewModelBase)vm);
             if (type == null) throw new Exception($"Kein View für {vm.GetType().ToString} gefunden");
