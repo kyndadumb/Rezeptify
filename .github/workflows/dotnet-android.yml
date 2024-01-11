@@ -27,7 +27,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build Rezeptify.csproj -c Release -f net8.0-android /p:AndroidSigningKeyStore=rezeptify.keystore /p:AndroidSigningKeyAlias=rezeptify /p:AndroidSigningKeyPass="${{ secrets.KEYSTORE_PASSWORD }}" /p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASSWORD }}" --no-restore
+      run: dotnet build Rezeptify/Rezeptify.csproj -c Release -f net8.0-android /p:AndroidSigningKeyStore=rezeptify.keystore /p:AndroidSigningKeyAlias=rezeptify /p:AndroidSigningKeyPass="${{ secrets.KEYSTORE_PASSWORD }}" /p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASSWORD }}" --no-restore
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v3.1.0
       with:
