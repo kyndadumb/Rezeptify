@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Rezeptify.TestPage"
+             Background="Transparent"
+             NavigationPage.HasNavigationBar="False"
+             Title="dsfsdf">
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="6"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="auto,69,auto" ColumnDefinitions="*,3*">
+        <Button Text="Penis" Grid.Row="0"/>
+        <!--<Button Text="Penis" Grid.Row="1" />-->
+        <Button Text="Penis" Grid.Row="2" Grid.Column="1"/>
+        <RoundRectangle Grid.Row="2" BackgroundColor="Green" CornerRadius="20" />
+    </Grid>
+</ContentPage>

@@ -12,6 +12,7 @@ public class VMResolver
     public static Type Resolve(ViewModelBase vm)
     {
         if (vm.GetType() == typeof(StartVM)) return typeof(StartPage);
+        if (vm.GetType() == typeof(TestPageVM)) return typeof(TestPage);
         throw new Exception("Keine Page für dieses VM registriert!");
     }
 }
