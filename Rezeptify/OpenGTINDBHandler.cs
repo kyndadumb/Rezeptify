@@ -3,7 +3,7 @@
     internal class OpenGTINDBHandler
     {
         // Variablen
-        private string USER_ID;
+        private string? USER_ID;
         private readonly string baseURL = "http://opengtindb.org/";
         private readonly HttpClient httpClient;
 
@@ -17,7 +17,7 @@
         public void SetUserID(string user_id) => USER_ID = user_id;
 
         // API-Key holen
-        public string UserID => USER_ID;
+        public string? UserID => USER_ID;
 
         // Base-URL holen
         public string GetBaseURL() => baseURL;
@@ -39,7 +39,7 @@
                     return await httpResponseMessage.Content.ReadAsStringAsync();
                 }
 
-                else { throw new Exception($"{httpResponseMessage.StatusCode} - {httpResponseMessage.ReasonPhrase}")}
+                else { throw new Exception($"{httpResponseMessage.StatusCode} - {httpResponseMessage.ReasonPhrase}"); }
             }
             catch (Exception ex)
             {
