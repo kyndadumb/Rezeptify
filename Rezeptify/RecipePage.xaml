@@ -2,14 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Rezeptify.VM;assembly=Rezeptify.VM"
-             x:Class="Rezeptify.StartPage"
+             x:Class="Rezeptify.RecipePage"
              Shell.NavBarIsVisible="False"
              NavigationPage.HasNavigationBar="False"
-             Title="StartPage">
+             Title="RecipePage">
 
     <Grid Style="{StaticResource GridBackground}">
-        <Button Text="Lebensmittel" FontSize="{StaticResource FontMedium}" Grid.Row="0"  Grid.Column="0" BackgroundColor="#696969"/>
-        <Button Text="Rezept erstellen" Command="{Binding CMD_ShowRecipe}" FontSize="{StaticResource FontMedium}" Grid.Row="0" Grid.Column="1" BackgroundColor="#454545" BorderColor="Black" BorderWidth="2.5"/>
+        <Button Text="Lebensmittel" Command="{Binding CMD_StartPage}" FontSize="{StaticResource FontMedium}" Grid.Row="0"  Grid.Column="0" BackgroundColor="#454545" BorderColor="Black" BorderWidth="2.5"/>
+        <Button Text="Rezepte" Command="{Binding CMD_Recipe}" FontSize="{StaticResource FontMedium}" Grid.Row="0" Grid.Column="1" BackgroundColor="#696969"/>
         <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="20" Stroke="Black" StrokeThickness="3">
             <CollectionView BackgroundColor="#dedede" ItemsSource="{Binding IngredientsCollection}">
                 <CollectionView.Header>
@@ -28,7 +28,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Border>
-        <Button Style="{StaticResource ButtonSubmitMain}" FontSize="{StaticResource FontLarge}" Text="Lebensmittel hinzufügen" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <Button Style="{StaticResource ButtonSubmitMain}" FontSize="{StaticResource FontLarge}" Text="Rezept erstellen" Grid.Row="2" Grid.ColumnSpan="2"/>
     </Grid>
 
 </ContentPage>

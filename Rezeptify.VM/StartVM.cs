@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Rezeptify.VM.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -13,8 +15,32 @@ public class StartVM : ViewModelBase
     {
         this.CMD_ShowTest = new TaskCommand(ShowTestPage);
         this.CMD_ShowBarcode = new ActionCommand(ShowScanPage);
-        
+        this.CMD_ShowRecipe = new ActionCommand(ShowRecipePage);
+        TestCollection();
 
+    }
+
+    private async Task ShowRecipePage()
+    {
+        var vm = new RecipeVM();
+        _viewManager.Show(vm);
+        await Task.Delay(0);
+    }
+
+    private void TestCollection()
+    {
+        Ingredients ingredient1 = new Ingredients();
+        ingredient1.Quantity = 1;
+        ingredient1.Name = "Test";
+        IngredientsCollection.Add(ingredient1);
+        Ingredients ingredient2 = new Ingredients();
+        ingredient2.Quantity = 1;
+        ingredient2.Name = "Superultramegalangertest";
+        IngredientsCollection.Add(ingredient2);
+        Ingredients ingredient3 = new Ingredients();
+        ingredient3.Quantity = 1;
+        ingredient3.Name = "Test";
+        IngredientsCollection.Add(ingredient3);
     }
 
     private Task ShowScanPage()
@@ -31,13 +57,7 @@ public class StartVM : ViewModelBase
         return Task.CompletedTask;
     }
 
-    private string _Penis;
-
-    public string Penis
-    {
-        get { return _Penis; }
-        set { _Penis = value; }
-    }
+    public ObservableCollection<Ingredients> IngredientsCollection { get; set; } = [];
 
 
 
@@ -57,4 +77,5 @@ public class StartVM : ViewModelBase
         set { _CMD_ShowBarcode = value; }
     }
 
+    public ActionCommand CMD_ShowRecipe { get; set; }
 }

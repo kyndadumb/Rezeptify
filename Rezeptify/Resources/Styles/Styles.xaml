@@ -29,7 +29,7 @@
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="BorderWidth" Value="0"/>
-        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="CornerRadius" Value="1"/>
         <Setter Property="Padding" Value="14,10"/>
         <Setter Property="MinimumHeightRequest" Value="44"/>
         <Setter Property="MinimumWidthRequest" Value="44"/>
@@ -421,6 +421,20 @@
         <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
         <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
+    </Style>
+
+    <Style TargetType="Grid" x:Key="GridBackground">
+        <Setter Property="BackgroundColor" Value="#696969"/>
+        <Setter Property="RowDefinitions" Value="50, 6*, *"/>
+        <Setter Property="ColumnDefinitions" Value="*,*"/>
+    </Style>
+
+    <Style TargetType="Button" x:Key="ButtonSubmitMain">
+        <Setter Property="Margin" Value="20, 0, 20, 20"/>
+        <Setter Property="BackgroundColor" Value="#23be66"/>
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="BorderColor" Value="Black"/>
+        <Setter Property="BorderWidth" Value="2"/>
     </Style>
 
 </ResourceDictionary>
