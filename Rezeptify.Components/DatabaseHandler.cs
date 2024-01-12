@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using Rezeptify.AppComponents.Models;
 
 namespace Rezeptify.AppComponents
 {
@@ -41,6 +42,41 @@ namespace Rezeptify.AppComponents
             }
         }
 
+        // Vorhandene Zutaten aus der Datenbank laden
+        public static List<Ingredients> LoadIngredients()
+        {
+            // Variablen
+            List<Ingredients> ingredients = new();
 
+            try
+            {
+                SqliteCommand loadIng_command = new("SELECT * from ingredients");
+                SqliteDataReader reader = loadIng_command.ExecuteReader();
+
+                // while - Daten werden gelesen
+                while (reader.Read())
+                {
+                    // temporäre Ingredient erstellen und Daten lesen
+                    Ingredients temp = new()
+                    {
+                        Id = reader.GetInt32(0),
+                        Name = reader.GetString(1),
+                        Quantity = reader.GetFloat(3),
+                        Unit = reader.GetString(2)
+                    };
+
+                    // Ingredient zur Liste hinzufügen
+                    ingredients.Add(temp);
+
+                }
+            }
+            catch (Exception ex) 
+            { 
+                Console.WriteLine(ex.Message); 
+            }
+
+            // Liste der Zutaten zurückgeben
+            return ingredients;
+        }
     }
 }
