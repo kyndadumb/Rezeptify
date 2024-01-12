@@ -11,7 +11,7 @@
         </Style>
     </ContentPage.Resources>
     <Grid RowDefinitions="auto,69,auto" ColumnDefinitions="*,3*">
-        <Button Text="Penis" Grid.Row="0"/>
+        <Button Text="Penis" Grid.Row="0" Command="{Binding CMD_Back}"/>
         <!--<Button Text="Penis" Grid.Row="1" />-->
         <Button Text="Penis" Grid.Row="2" Grid.Column="1"/>
         <RoundRectangle Grid.Row="2" BackgroundColor="Green" CornerRadius="20" />

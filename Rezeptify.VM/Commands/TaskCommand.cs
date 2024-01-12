@@ -13,6 +13,11 @@ public class TaskCommand : CommandBase
         _function = function;
     }
 
+    //public TaskCommand(Action<Task> function)
+    //{
+    //    _function = function;
+    //}
+
     private Func<object, Task> _function;
 
     public override void Execute(object? parameter)

@@ -9,6 +9,7 @@
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <Button Text="ShowTestPage" Command="{Binding CMD_ShowTest}"/>
+        <Button Text="Testseite" Command="{Binding CMD_ShowTest}"/>
+        <Button Text="Scanseite" Command="{Binding CMD_ShowBarcode}"/>
     </VerticalStackLayout>
 </ContentPage>
