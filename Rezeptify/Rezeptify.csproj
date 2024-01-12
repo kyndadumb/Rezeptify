@@ -89,16 +89,16 @@
 		<Compile Update="EntryPoint.xaml.cs">
 			<DependentUpon>EntryPoint.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="AddFoodPage.xaml.cs">
+		<Compile Update="Pages\AddFoodPage.xaml.cs">
 			<DependentUpon>AddFoodPage.xaml</DependentUpon>
 		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-		<MauiXaml Update="AddFoodPage.xaml">
+		<MauiXaml Update="Pages\AddFoodPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="BarcodePage.xaml">
+		<MauiXaml Update="Pages\BarcodePage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="RecipePage.xaml">
@@ -107,7 +107,7 @@
 		<MauiXaml Update="StartPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="TestPage.xaml">
+		<MauiXaml Update="Pages\TestPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 	</ItemGroup>
