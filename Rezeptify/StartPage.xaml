@@ -3,13 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Rezeptify.VM;assembly=Rezeptify.VM"
              x:Class="Rezeptify.StartPage"
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False"
              Title="StartPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button Text="Testseite" Command="{Binding CMD_ShowTest}"/>
-        <Button Text="Scanseite" Command="{Binding CMD_ShowBarcode}"/>
-    </VerticalStackLayout>
+
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="CornerRadius" Value="1"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid
+            RowDefinitions="40, 6*, *"
+            ColumnDefinitions="*, *"
+            BackgroundColor="#696969">
+        <Button Text="Lebensmittel" Grid.Row="0"  Grid.Column="0" BackgroundColor="#696969"/>
+        <Button Text="Rezept erstellen" Grid.Row="0" Grid.Column="1" BackgroundColor="#454545" BorderColor="Black" BorderWidth="2.5"/>
+        <Grid Background="#dedede" Margin="20" Grid.Row="1" Grid.ColumnSpan="2" RowDefinitions="auto">
+            <Label Text="Test 123" Grid.Row="0"/>
+        </Grid>
+        <Button Text="Lebensmittel hinzufügen" BackgroundColor="#23be66" VerticalOptions="FillAndExpand" Grid.Row="2" Grid.ColumnSpan="2"/>
+    </Grid>
+
 </ContentPage>
