@@ -37,19 +37,19 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
-	  <ApplicationId>com.rezeptify.rezeptify</ApplicationId>
+		<ApplicationId>com.rezeptify.rezeptify</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationId>com.rezeptify.rezeptify</ApplicationId>
+		<ApplicationId>com.rezeptify.rezeptify</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
-	  <ApplicationId>com.rezeptify.rezeptify</ApplicationId>
+		<ApplicationId>com.rezeptify.rezeptify</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationId>com.rezeptify.rezeptify</ApplicationId>
+		<ApplicationId>com.rezeptify.rezeptify</ApplicationId>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -81,29 +81,32 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Rezeptify.Components\Rezeptify.AppComponents.csproj" />
-	  <ProjectReference Include="..\Rezeptify.VM\Rezeptify.VM.csproj" />
+		<ProjectReference Include="..\Rezeptify.Components\Rezeptify.AppComponents.csproj" />
+		<ProjectReference Include="..\Rezeptify.VM\Rezeptify.VM.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="EntryPoint.xaml.cs">
-	    <DependentUpon>EntryPoint.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="AddFoodPage.xaml.cs">
-	    <DependentUpon>AddFoodPage.xaml</DependentUpon>
-	  </Compile>
+		<Compile Update="EntryPoint.xaml.cs">
+			<DependentUpon>EntryPoint.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="AddFoodPage.xaml.cs">
+			<DependentUpon>AddFoodPage.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="AddFoodPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="StartPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="TestPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="AddFoodPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="BarcodePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="StartPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="TestPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
 </Project>

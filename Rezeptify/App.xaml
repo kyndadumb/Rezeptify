@@ -10,6 +10,6 @@
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    <local:BarcodeEventArgsConverter x:Key="BarcodeCon"/>
+    
     </Application.Resources>
 </Application>
