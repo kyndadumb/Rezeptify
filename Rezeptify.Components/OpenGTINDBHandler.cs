@@ -1,4 +1,4 @@
-﻿namespace Rezeptify
+﻿namespace Rezeptify.AppComponents
 {
     internal class OpenGTINDBHandler
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 
-namespace Rezeptify
+namespace Rezeptify.AppComponents
 {
     class DatabaseHandler
     {
@@ -25,7 +25,7 @@ namespace Rezeptify
                 SqliteCommand create_ingredients = dbConn.CreateCommand();
                 create_ingredients.CommandText = "CREATE TABLE IF NOT EXISTS ingredients (id INTEGER NOT NULL, name TEXT NOT NULL, quantity REAL NULL, unit VARCHAR(50) NULL, PRIMARY KEY (id));";
                 create_ingredients.ExecuteNonQuery();
-            
+
                 SqliteCommand create_recipeingredients = dbConn.CreateCommand();
                 create_recipeingredients.CommandText = "CREATE TABLE IF NOT EXISTS recipeingredients (recipe_id INTEGER NOT NULL, ingredient_id INTEGER NOT NULL, CONSTRAINT 0 FOREIGN KEY (ingredient_id) REFERENCES ingredients (id) ON UPDATE NO ACTION ON DELETE NO ACTION, CONSTRAINT 1 FOREIGN KEY (recipe_id) REFERENCES recipe (id) ON UPDATE NO ACTION ON DELETE NO ACTION);";
                 create_recipeingredients.ExecuteNonQuery();
@@ -34,7 +34,7 @@ namespace Rezeptify
                 create_eancodes.CommandText = "CREATE TABLE IF NOT EXISTS eancodes ( id INTEGER NOT NULL, eancode VARCHAR(255) NOT NULL, ingredient_id INTEGER NOT NULL, CONSTRAINT 0 FOREIGN KEY (ingredient_id) REFERENCES ingredients (id) ON UPDATE NO ACTION ON DELETE NO ACTION);";
                 create_eancodes.ExecuteNonQuery();
             }
-            
+
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
