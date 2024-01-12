@@ -101,10 +101,10 @@
 		<MauiXaml Update="Pages\BarcodePage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="RecipePage.xaml">
+		<MauiXaml Update="Pages\RecipePage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="StartPage.xaml">
+		<MauiXaml Update="Pages\StartPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Pages\TestPage.xaml">
