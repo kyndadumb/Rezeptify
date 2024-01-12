@@ -23,7 +23,7 @@ public class StartVM : ViewModelBase
     private async Task ShowRecipePage()
     {
         var vm = new RecipeVM();
-        _viewManager.Show(vm);
+        _viewManager.Show(vm,false);
         await Task.Delay(0);
     }
 

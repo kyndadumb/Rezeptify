@@ -16,7 +16,7 @@ namespace Rezeptify.VM
         private async Task ShowStartPage()
         {
             var vm = new StartVM();
-            _viewManager.Show(vm);
+            _viewManager.Show(vm,false);
             await Task.Delay(0);
         }
 

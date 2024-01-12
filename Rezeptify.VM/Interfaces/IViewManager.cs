@@ -8,5 +8,5 @@ namespace Rezeptify.VM;
 
 public interface IViewManager
 {
-    public void Show(object vm);
+    public void Show(object vm,bool hasAnimation = true);
 }
