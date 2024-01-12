@@ -78,5 +78,22 @@ namespace Rezeptify.AppComponents
             // Liste der Zutaten zurückgeben
             return ingredients;
         }
+
+        // neue Zutat hinzufügen
+        public static void AddIngredients(string name, float quantity, string unit)
+        {
+            try
+            {
+                SqliteCommand ing_insert = new("INSERT INTO ingredients (name, quantity, unit) VALUES (@name, @quantity, @unit)");
+                ing_insert.Parameters.AddWithValue("@name", name);
+                ing_insert.Parameters.AddWithValue("@quantity", quantity);
+                ing_insert.Parameters.AddWithValue("@unit", unit);
+                ing_insert.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }
