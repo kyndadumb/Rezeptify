@@ -32,7 +32,7 @@ namespace Rezeptify.AppComponents
                 create_recipeingredients.ExecuteNonQuery();
 
                 SqliteCommand create_eancodes = dbConn.CreateCommand();
-                create_eancodes.CommandText = "CREATE TABLE IF NOT EXISTS eancodes ( id INTEGER NOT NULL, eancode VARCHAR(255) NOT NULL, ingredient_id INTEGER NOT NULL, CONSTRAINT 0 FOREIGN KEY (ingredient_id) REFERENCES ingredients (id) ON UPDATE NO ACTION ON DELETE NO ACTION);";
+                create_eancodes.CommandText = "CREATE TABLE IF NOT EXISTS eancodes ( id INTEGER NOT NULL, eancode VARCHAR(255) NOT NULL, ingredient_id INTEGER NOT NULL, PRIMARY KEY (id), CONSTRAINT 0 FOREIGN KEY (ingredient_id) REFERENCES ingredients (id) ON UPDATE NO ACTION ON DELETE NO ACTION);";
                 create_eancodes.ExecuteNonQuery();
             }
 
@@ -77,6 +77,42 @@ namespace Rezeptify.AppComponents
 
             // Liste der Zutaten zurückgeben
             return ingredients;
+        }
+
+        // neue Zutat hinzufügen
+        public static void AddIngredients(string name, float quantity, string unit, string ean)
+        {
+            // Variablen
+            int? ingredient_id = null;
+            
+            try
+            {
+                // Lebensmittel hinzufügen
+                SqliteCommand ing_insert = new("INSERT INTO ingredients (name, quantity, unit) VALUES (@name, @quantity, @unit)");
+                ing_insert.Parameters.AddWithValue("@name", name);
+                ing_insert.Parameters.AddWithValue("@quantity", quantity);
+                ing_insert.Parameters.AddWithValue("@unit", unit);
+                ing_insert.ExecuteNonQuery();
+
+                // max Ingredient_ID holen => aktuell hinzugefügte Zutat
+                SqliteCommand ing_id_select = new("SELECT MAX(ingredient_id) from ingredients");
+                SqliteDataReader reader = ing_insert.ExecuteReader();
+
+                if (reader.Read()) { ingredient_id = reader.GetInt32(0); }
+
+                if (ingredient_id != null)
+                {
+                    // EAN-Code in die DB schreiben
+                    SqliteCommand ean_insert = new("INSERT INTO eancodes (eancode, ingredient_id) VALUES (@eancode, @ingredient_id)");
+                    ean_insert.Parameters.AddWithValue("@eancode", ean);
+                    ean_insert.Parameters.AddWithValue("@ingredient_id", ingredient_id);
+                    ean_insert.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
