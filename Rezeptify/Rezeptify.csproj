@@ -92,6 +92,9 @@
 		<Compile Update="Pages\AddFoodPage.xaml.cs">
 			<DependentUpon>AddFoodPage.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Pages\RecipeResultPage.xaml.cs">
+		  <DependentUpon>RecipeResultPage.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -102,6 +105,9 @@
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Pages\RecipePage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\RecipeResultPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Pages\StartPage.xaml">

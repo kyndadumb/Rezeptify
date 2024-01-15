@@ -1,4 +1,5 @@
-﻿using Rezeptify.VM;
+﻿using Rezeptify.Pages;
+using Rezeptify.VM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ public class VMResolver
         if (vm.GetType() == typeof(TestPageVM)) return typeof(TestPage);
         if (vm.GetType() == typeof(BarcodeVM)) return typeof(BarcodePage);
         if (vm.GetType() == typeof(RecipeVM)) return typeof(RecipePage);
+        if(vm.GetType() == typeof(RecipeResultVM)) return typeof (RecipeResultPage);
         throw new Exception("Keine Page für dieses VM registriert!");
     }
 }

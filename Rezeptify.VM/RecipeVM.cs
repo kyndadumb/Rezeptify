@@ -1,10 +1,5 @@
 ﻿using Rezeptify.VM.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rezeptify.VM
 {
@@ -13,7 +8,15 @@ namespace Rezeptify.VM
         public RecipeVM()
         {
             this.CMD_StartPage = new ActionCommand(ShowStartPage);
+            this.CMD_Result = new ActionCommand(ShowRecipeResultPage);
             TestCollection();
+        }
+
+        private async Task ShowRecipeResultPage()
+        {
+            var vm = new RecipeResultVM();
+            _viewManager.Show(vm);
+            await Task.Delay(0);
         }
 
         private async Task ShowStartPage()
@@ -41,5 +44,7 @@ namespace Rezeptify.VM
         }
 
         public ActionCommand CMD_StartPage { get; set; }
+
+        public ActionCommand CMD_Result { get; set; }
     }
 }
