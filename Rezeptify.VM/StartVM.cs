@@ -41,13 +41,13 @@ public class StartVM : ViewModelBase
 
     private void LoadIngredients()
     {
-        SqliteConnection sqliteConnection = DatabaseHandler.OpenDatabaseConnection();
-        List<Ingredients> list = DatabaseHandler.LoadIngredients(sqliteConnection);
+        //SqliteConnection sqliteConnection = DatabaseHandler.OpenDatabaseConnection();
+        //List<Ingredients> list = DatabaseHandler.LoadIngredients(sqliteConnection);
 
-        foreach (Ingredients ing in list) { IngredientsCollection.Add(ing); }
+        //foreach (Ingredients ing in list) { IngredientsCollection.Add(ing); }
     }
 
-    private Task ShowScanPage()
+    private void ShowScanPage()
     {
         var vm = new BarcodeVM(this);
         _viewManager.Show(vm);

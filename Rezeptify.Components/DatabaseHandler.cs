@@ -3,7 +3,7 @@ using Rezeptify.AppComponents.Models;
 
 namespace Rezeptify.AppComponents
 {
-    class DatabaseHandler
+    public static class DatabaseHandler
     {
         static string databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "rezeptify.db");
 
