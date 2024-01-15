@@ -14,15 +14,15 @@
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <zxing:CameraBarcodeReaderView IsTorchOn="{Binding TorchEnabled}">
+        <zxing:CameraBarcodeReaderView x:Name="cameraBarcodeReaderView" IsTorchOn="{Binding TorchEnabled}">
             <zxing:CameraBarcodeReaderView.Behaviors>
                 <toolkit:EventToCommandBehavior EventName="BarcodesDetected" Command="{Binding CMD_BarcodeScanned}" EventArgsConverter="{StaticResource BarcodeCon}"/>
             </zxing:CameraBarcodeReaderView.Behaviors>
         </zxing:CameraBarcodeReaderView>
         <Grid>
-            <Button Text="Zurück"/>
-            <Button Text="Licht umschalten"/>
-            <Button Text="Weiter"/>
+            <!--<Button Text="Zurück"/>-->
+            <!--<Button Text="Licht umschalten"/>-->
+            <Button Text="{Binding BarcodeTest}"/>
         </Grid>
     </VerticalStackLayout>
 </ContentPage>
