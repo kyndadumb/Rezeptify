@@ -10,17 +10,17 @@
     <ContentPage.Resources>
         <local:BarcodeEventArgsConverter x:Key="BarcodeCon"/>
     </ContentPage.Resources>
-    <VerticalStackLayout>
-        <zxing:CameraBarcodeReaderView x:Name="cameraBarcodeReaderView" IsTorchOn="{Binding TorchEnabled}">
+    <Grid RowDefinitions="Auto,Auto,*,Auto">
+        <zxing:CameraBarcodeReaderView x:Name="cameraBarcodeReaderView" Grid.Row="0" IsTorchOn="{Binding TorchEnabled}">
             <zxing:CameraBarcodeReaderView.Behaviors>
                 <toolkit:EventToCommandBehavior EventName="BarcodesDetected" Command="{Binding CMD_BarcodeScanned}" EventArgsConverter="{StaticResource BarcodeCon}"/>
             </zxing:CameraBarcodeReaderView.Behaviors>
         </zxing:CameraBarcodeReaderView>
-        <Label Text="{Binding BarcodeTest}"/>
-        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
-            <Button Text="Zurück" Grid.Column="0"/>
-            <Button Text="&#xE754;" Grid.Column="1" FontFamily="Symbols"/>
-            <Button Text="{Binding BarcodeTest}" Command="{Binding CMD_ToggleFlashlight}" Grid.Column="2"/>
+        <Label Text="{Binding ErrorText}" Grid.Row="1"/>
+        <Grid ColumnDefinitions="*,*" Grid.Row="3" ColumnSpacing="10">
+            <Button Text="&#xE72B;" FontFamily="Symbols" Command="{Binding CMD_Back}" Grid.Column="0"/>
+            <Button Text="&#xE754;" Grid.Column="1" Command="{Binding CMD_ToggleFlashlight}" FontFamily="Symbols"/>
+            <!--<Button Text="{Binding BarcodeTest}" Grid.Column="2"/>-->
         </Grid>
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>
