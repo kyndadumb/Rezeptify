@@ -1,6 +1,6 @@
 ﻿namespace Rezeptify.AppComponents
 {
-    internal class OpenGTINDBHandler
+    public class OpenGTINDBHandler
     {
         // Variablen
         private string? USER_ID;
@@ -48,7 +48,7 @@
         }
 
         // Kategorie-Information aus der Produktinfo extrahieren
-        private string ReturnInfoByCategory(string productinfo, string category)
+        public string ReturnInfoByCategory(string productinfo, string category)
         {
             string result = null;
 

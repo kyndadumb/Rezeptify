@@ -8,16 +8,16 @@ using System.Windows.Input;
 
 namespace Rezeptify.VM;
 
-public class TaskCommand : IAsyncCommand
+public class TaskCommandWithPar : IAsyncCommand
 {
     public event EventHandler CanExecuteChanged;
 
     private bool _isExecuting;
-    private readonly Func<Task> _execute;
+    private readonly Func<object,Task> _execute;
     private readonly Func<bool> _canExecute;
     private readonly IErrorHandler _errorHandler;
 
-    public TaskCommand(Func<Task> execute,Func<bool> canExecute = null, IErrorHandler errorHandler = null)
+    public TaskCommandWithPar(Func<object,Task> execute,Func<bool> canExecute = null, IErrorHandler errorHandler = null)
     {
         _execute = execute;
         _canExecute = canExecute;
@@ -36,7 +36,7 @@ public class TaskCommand : IAsyncCommand
             try
             {
                 _isExecuting = true;
-                await _execute();
+                await _execute(par);
             }
             finally
             {

@@ -63,21 +63,10 @@ public class StartVM : ViewModelBase
 
 
 
-    private ActionCommand _CMD_ShowTest;
 
-	public ActionCommand CMD_ShowTest
-	{
-		get { return _CMD_ShowTest; }
-		set { _CMD_ShowTest = value; }
-	}
+	public ActionCommand CMD_ShowTest { get;set; }
 
-    private ActionCommand _CMD_ShowBarcode;
-
-    public ActionCommand CMD_ShowBarcode
-    {
-        get { return _CMD_ShowBarcode; }
-        set { _CMD_ShowBarcode = value; }
-    }
+    public ActionCommand CMD_ShowBarcode { get; set; }  
 
     public ActionCommand CMD_ShowRecipe { get; set; }
 }

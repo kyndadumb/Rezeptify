@@ -16,6 +16,7 @@
                 <toolkit:EventToCommandBehavior EventName="BarcodesDetected" Command="{Binding CMD_BarcodeScanned}" EventArgsConverter="{StaticResource BarcodeCon}"/>
             </zxing:CameraBarcodeReaderView.Behaviors>
         </zxing:CameraBarcodeReaderView>
+        <Label Text="{Binding BarcodeTest}"/>
         <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
             <Button Text="Zurück" Grid.Column="0"/>
             <Button Text="&#xE754;" Grid.Column="1" FontFamily="Symbols"/>

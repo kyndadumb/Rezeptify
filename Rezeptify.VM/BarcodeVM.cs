@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rezeptify.AppComponents;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ public class BarcodeVM : ViewModelBase
     {
         _backVM = backVM;
         CMD_Back = new ActionCommand(GoBack);
-        CMD_BarcodeScanned = new ActionCommand(BarcodeScanned);
+        CMD_BarcodeScanned = new TaskCommandWithPar(BarcodeScanned);
         CMD_ToggleFlashlight = new ActionCommand(ToggleFlashlight);
     }
 
@@ -22,9 +23,12 @@ public class BarcodeVM : ViewModelBase
         TorchEnabled = !TorchEnabled;
     }
 
-    private void BarcodeScanned(object arg)
+    private async Task BarcodeScanned(object arg)
     {
-        BarcodeTest = (string)arg;
+        var gtinHandler = new OpenGTINDBHandler("400000000");
+        var gtinInfo = await gtinHandler.GetProductInformation((string)arg ?? "");
+        var cat = gtinHandler.ReturnInfoByCategory(gtinInfo, "name");
+        BarcodeTest = cat;
     }
 
     private void GoBack()
@@ -42,7 +46,7 @@ public class BarcodeVM : ViewModelBase
 
     public ActionCommand CMD_Back { get; set; }
 
-    public ActionCommand CMD_BarcodeScanned { get; set; }
+    public TaskCommandWithPar CMD_BarcodeScanned { get; set; }
     public ActionCommand CMD_ToggleFlashlight { get; set; }
 
     private string _BarcodeTest;

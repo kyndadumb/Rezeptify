@@ -9,7 +9,7 @@ namespace Rezeptify.VM.Interfaces
 {
     internal interface IAsyncCommand : ICommand
     {
-        Task ExecuteAsync();
+        Task ExecuteAsync(object par = null);
         bool CanExecute();
     }
 }
