@@ -1,4 +1,5 @@
-﻿using Rezeptify.VM.Models;
+﻿
+using Rezeptify.AppComponents.Models;
 using System.Collections.ObjectModel;
 
 namespace Rezeptify.VM
@@ -12,11 +13,10 @@ namespace Rezeptify.VM
             TestCollection();
         }
 
-        private async Task ShowRecipeResultPage()
+        private void ShowRecipeResultPage()
         {
             var vm = new RecipeResultVM();
             _viewManager.Show(vm);
-            await Task.Delay(0);
         }
 
         private void ShowStartPage()
