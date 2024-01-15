@@ -9,4 +9,6 @@ namespace Rezeptify.VM;
 public interface IViewManager
 {
     public void Show(object vm,bool hasAnimation = true);
+    public Task ShowPopUp(object vm);
+
 }

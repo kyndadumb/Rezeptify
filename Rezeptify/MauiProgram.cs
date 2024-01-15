@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Views;
 using Microsoft.Extensions.Logging;
 using Rezeptify.VM;
 using ZXing.Net.Maui.Controls;
@@ -21,7 +22,6 @@ namespace Rezeptify
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                     fonts.AddFont("SegMDL2.ttf", "Symbols");
                 });
-
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif

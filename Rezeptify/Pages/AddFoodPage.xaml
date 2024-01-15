@@ -2,11 +2,17 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Rezeptify.AddFoodPage"
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False"
              Title="AddFoodPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid Style="{StaticResource GridBackground}">
+        <Label Text="Lebensmittel hinzufügen" FontSize="{StaticResource FontLarge}" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,1" Grid.Row="0" Grid.ColumnSpan="2"/>
+        <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="20,10,20,20" Stroke="Black" StrokeThickness="3" BackgroundColor="#dedede">
+            <Grid RowDefinitions="auto, auto" Margin="20">
+                <Entry Placeholder="Lebensmittel" Grid.Row="0"/>
+                <Entry Placeholder="Menge" Grid.Row="1"/>
+            </Grid>
+        </Border>
+        <Button Command="{Binding CMD_Back}" Style="{StaticResource ButtonSubmitMain}" BackgroundColor="#ff6666" FontSize="{StaticResource FontLarge}" Text="Rezept schließen" Grid.Row="2" Grid.ColumnSpan="2"/>
+    </Grid>
 </ContentPage>
