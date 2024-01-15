@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Rezeptify.VM;
+using ZXing.Net.Maui.Controls;
 
 namespace Rezeptify
 {
@@ -13,6 +14,7 @@ namespace Rezeptify
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
                 .RegisterAppServices()
+                .UseBarcodeReader()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

@@ -1,5 +1,4 @@
-﻿
-using Rezeptify.AppComponents.Models;
+﻿using Rezeptify.AppComponents.Models;
 using System.Collections.ObjectModel;
 
 namespace Rezeptify.VM
@@ -15,7 +14,7 @@ namespace Rezeptify.VM
 
         private void ShowRecipeResultPage()
         {
-            var vm = new RecipeResultVM();
+            var vm = new RecipeResultVM(this);
             _viewManager.Show(vm);
         }
 

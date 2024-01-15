@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezeptify", "Rezeptify\Reze
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezeptify.VM", "Rezeptify.VM\Rezeptify.VM.csproj", "{F5F9077C-A149-410B-9879-79C48D866C78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezeptify.AppComponents", "Rezeptify.Components\Rezeptify.AppComponents.csproj", "{258E19A7-CFF8-4A87-A4F9-683A4026ECE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezeptify.AppComponents", "Rezeptify.Components\Rezeptify.AppComponents.csproj", "{258E19A7-CFF8-4A87-A4F9-683A4026ECE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
