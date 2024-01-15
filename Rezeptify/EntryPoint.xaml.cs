@@ -1,5 +1,7 @@
 ﻿
+using Rezeptify.AppComponents;
 using Rezeptify.VM;
+using Rezeptify.VM.Interfaces;
 using Components = Rezeptify.AppComponents.Components;
 
 namespace Rezeptify
@@ -26,6 +28,7 @@ namespace Rezeptify
 
         private void LoadComponents()
         {
+            Components.RegisterService(typeof(IFileManager),new FileManager()); 
 
             var dgt = new ViewModelResolver(VMResolver.Resolve);
             var shell = (Shell)App.Current!.MainPage;
