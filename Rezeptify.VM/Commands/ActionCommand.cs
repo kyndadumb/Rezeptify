@@ -8,17 +8,29 @@ namespace Rezeptify.VM;
 
 public class ActionCommand : CommandBase
 {
-    private Func<Task> _action;
+    private Action _action;
+    private Action<object> _actionWithPar;
 
-    public ActionCommand(Func<Task> action)
+    public ActionCommand(Action action)
     {
         _action = action;
     }
 
+    public ActionCommand(Action<object> action)
+    {
+        _actionWithPar = action;
+    }
+
     public override void Execute(object? parameter)
     {
-        if (_action == null || IsAllowed == false) return;
-        _action.Invoke();
-        base.Execute(parameter);
+        if (IsAllowed == false) return;
+        if (_action != null)
+        {
+            _action.Invoke();
+        }
+        else
+        {
+            _actionWithPar.Invoke(parameter!);
+        }
     }
 }

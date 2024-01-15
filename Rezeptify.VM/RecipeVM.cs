@@ -13,11 +13,10 @@ namespace Rezeptify.VM
             this.CMD_StartPage = new ActionCommand(ShowStartPage);
         }
 
-        private async Task ShowStartPage()
+        private void ShowStartPage()
         {
             var vm = new StartVM();
             _viewManager.Show(vm,false);
-            await Task.Delay(0);
         }
 
         public ActionCommand CMD_StartPage { get; set; }
