@@ -14,7 +14,7 @@ namespace Rezeptify.VM
 
         private async void ShowRecipeResultPage()
         {
-            var vm = new BarcodeVM(this);
+            var vm = new RecipeResultVM(this);
             _viewManager.Show(vm);
         }
 
