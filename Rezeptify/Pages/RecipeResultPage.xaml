@@ -12,6 +12,6 @@
                 <Label Text="Platzhalter" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" FontSize="{StaticResource FontMedium}"/>
             </Grid>            
         </Border>
-        <Button Style="{StaticResource ButtonSubmitMain}" BackgroundColor="#ff6666" FontSize="{StaticResource FontLarge}" Text="Rezept schließen" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <Button Command="{Binding CMD_Back}" Style="{StaticResource ButtonSubmitMain}" BackgroundColor="#ff6666" FontSize="{StaticResource FontLarge}" Text="Rezept schließen" Grid.Row="2" Grid.ColumnSpan="2"/>
     </Grid>
 </ContentPage>

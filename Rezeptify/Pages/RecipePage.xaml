@@ -11,7 +11,7 @@
         <Button Text="Lebensmittel" Command="{Binding CMD_StartPage}" FontSize="{StaticResource FontMedium}" Grid.Row="0"  Grid.Column="0" BackgroundColor="#454545" BorderColor="Black" BorderWidth="2.5"/>
         <Button Text="Rezepte" FontSize="{StaticResource FontMedium}" Grid.Row="0" Grid.Column="1" BackgroundColor="#696969"/>
         <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="20" Stroke="Black" StrokeThickness="3">
-            <CollectionView BackgroundColor="#dedede" ItemsSource="{Binding IngredientsCollection}">
+            <CollectionView BackgroundColor="#dedede" ItemsSource="{Binding IngredientsCollection}" SelectionMode="Multiple">
                 <CollectionView.Header>
                     <Grid ColumnDefinitions="2*,*">
                         <Label FontSize="{StaticResource FontMedium}" Text="Bezeichnung" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,15"/>
@@ -20,10 +20,9 @@
                 </CollectionView.Header>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid ColumnDefinitions="40, 2*, *">
-                            <CheckBox Color="#454545" Grid.Column="0" HorizontalOptions="Center"/>
-                            <Label FontSize="{StaticResource FontSmall}" Text="{Binding Name}" Grid.Column="1" Margin="20, 0, 20, 10" LineBreakMode="TailTruncation" VerticalOptions="Center"/>
-                            <Label FontSize="{StaticResource FontSmall}" Text="{Binding Quantity}" Grid.Column="2" HorizontalOptions="Center"  VerticalOptions="Center" Margin="20, 0, 20, 10"/>
+                        <Grid ColumnDefinitions="2*, *">
+                            <Label FontSize="{StaticResource FontSmall}" Text="{Binding Name}" Grid.Column="0" Margin="20, 0, 20, 10" LineBreakMode="TailTruncation" VerticalOptions="Center"/>
+                            <Label FontSize="{StaticResource FontSmall}" Text="{Binding Quantity}" Grid.Column="1" HorizontalOptions="Center"  VerticalOptions="Center" Margin="20, 0, 20, 10"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
