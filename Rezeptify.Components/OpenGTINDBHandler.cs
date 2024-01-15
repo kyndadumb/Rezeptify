@@ -47,5 +47,45 @@
             }
         }
 
+        // Kategorie-Information aus der Produktinfo extrahieren
+        private string ReturnInfoByCategory(string productinfo, string category)
+        {
+            string result = null;
+
+            // Antwort anhand der Trennzeichen teilen
+            string[] sections = productinfo.Split(new[] { "---" }, StringSplitOptions.RemoveEmptyEntries);
+
+            // Errorsection prüfen
+            string errorSection = sections.Length > 0 ? sections[0] : string.Empty;
+
+            // if - kein Fehler wurde gemeldet
+            if (errorSection.Contains("error=0"))
+            {
+                // einzelne Sektionen nehmen und passendes Attribut liefern
+                string productSection = sections.Length > 1 ? sections[1] : string.Empty;
+                string[] attributes = productSection.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                result = SubstringKey(attributes, $"{category}=");
+            }
+
+            // Ergebnis zurückgeben, entweder Key oder leerer String
+            return result;
+        }
+
+        // Key aus dem Input zurückgeben
+        private string SubstringKey(string[] input, string key)
+        {
+            string result = string.Empty;
+            
+            foreach (string attribute in input)
+            {
+                if (attribute.StartsWith(key))
+                {
+                    result =  attribute.Substring(key.Length);
+                }
+            }
+            
+            return result;
+        }
+
     }
 }

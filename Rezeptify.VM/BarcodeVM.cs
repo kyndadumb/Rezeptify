@@ -13,24 +13,22 @@ public class BarcodeVM : ViewModelBase
     {
         _backVM = backVM;
         CMD_Back = new ActionCommand(GoBack);
-        CMD_BarcodeScanned = new TaskCommand(BarcodeScanned);
+        CMD_BarcodeScanned = new ActionCommand(BarcodeScanned);
     }
 
-    private async Task BarcodeScanned(object arg)
+    private void BarcodeScanned(object arg)
     {
-        await Task.Delay(0);
         BarcodeTest = (string)arg;
     }
 
-    private async Task GoBack()
+    private void GoBack()
     {
-        await Task.Delay(0);
         _viewManager.Show(_backVM);
     }
 
     public ActionCommand CMD_Back { get; set; }
 
-    public TaskCommand CMD_BarcodeScanned { get; set; }
+    public ActionCommand CMD_BarcodeScanned { get; set; }
 
     private string _BarcodeTest;
 

@@ -1,11 +1,7 @@
-﻿using Rezeptify.VM.Models;
-using System;
-using System.Collections.Generic;
+﻿using Rezeptify.AppComponents.Models;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+using Rezeptify.AppComponents;
+using Microsoft.Data.Sqlite;
 
 namespace Rezeptify.VM;
 
@@ -13,18 +9,18 @@ public class StartVM : ViewModelBase
 {
     public StartVM()
     {
-        this.CMD_ShowTest = new TaskCommand(ShowTestPage);
+        this.CMD_ShowTest = new ActionCommand(ShowTestPage);
         this.CMD_ShowBarcode = new ActionCommand(ShowScanPage);
         this.CMD_ShowRecipe = new ActionCommand(ShowRecipePage);
-        TestCollection();
+        //TestCollection();
 
+        LoadIngredients();
     }
 
-    private async Task ShowRecipePage()
+    private void ShowRecipePage()
     {
         var vm = new RecipeVM();
         _viewManager.Show(vm,false);
-        await Task.Delay(0);
     }
 
     private void TestCollection()
@@ -43,27 +39,33 @@ public class StartVM : ViewModelBase
         IngredientsCollection.Add(ingredient3);
     }
 
-    private Task ShowScanPage()
+    private void LoadIngredients()
+    {
+        SqliteConnection sqliteConnection = DatabaseHandler.OpenDatabaseConnection();
+        List<Ingredients> list = DatabaseHandler.LoadIngredients(sqliteConnection);
+
+        foreach (Ingredients ing in list) { IngredientsCollection.Add(ing); }
+    }
+
+    private void ShowScanPage()
     {
         var vm = new BarcodeVM(this);
         _viewManager.Show(vm);
-        return Task.CompletedTask;
     }
 
-    private Task ShowTestPage(object arg)
+    private void ShowTestPage()
     {
         var vm = new TestPageVM(this);
         this._viewManager.Show(vm);
-        return Task.CompletedTask;
     }
 
     public ObservableCollection<Ingredients> IngredientsCollection { get; set; } = [];
 
 
 
-    private TaskCommand _CMD_ShowTest;
+    private ActionCommand _CMD_ShowTest;
 
-	public TaskCommand CMD_ShowTest
+	public ActionCommand CMD_ShowTest
 	{
 		get { return _CMD_ShowTest; }
 		set { _CMD_ShowTest = value; }

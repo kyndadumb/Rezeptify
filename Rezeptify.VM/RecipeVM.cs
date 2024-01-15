@@ -19,11 +19,10 @@ namespace Rezeptify.VM
             await Task.Delay(0);
         }
 
-        private async Task ShowStartPage()
+        private void ShowStartPage()
         {
             var vm = new StartVM();
             _viewManager.Show(vm,false);
-            await Task.Delay(0);
         }
         public ObservableCollection<Ingredients> IngredientsCollection { get; set; } = [];
 

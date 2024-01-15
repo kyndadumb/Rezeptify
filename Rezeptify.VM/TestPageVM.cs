@@ -12,14 +12,13 @@ public class TestPageVM : ViewModelBase
     public TestPageVM(ViewModelBase vm)
     {
         _backVM = vm;
-        CMD_Back = new TaskCommand(BackToStart);
+        CMD_Back = new ActionCommand(BackToStart);
     }
 
-    private Task BackToStart(object arg)
+    private void BackToStart()
     {
         _viewManager.Show(_backVM);
-        return Task.CompletedTask;
     }
 
-    public TaskCommand CMD_Back { get; set; }
+    public ActionCommand CMD_Back { get; set; }
 }
