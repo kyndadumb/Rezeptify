@@ -36,6 +36,8 @@ public class BarcodeVM : ViewModelBase
             var cat = gtinHandler.ReturnInfoByCategory(gtinInfo, "name");
 
             //zu neuem VM
+            var vm = new AddFoodVM(_backVM, cat, scannedCode);
+            _viewManager.Show(vm);
         }
         catch (Exception ex)
         {
