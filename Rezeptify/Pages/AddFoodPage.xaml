@@ -13,6 +13,7 @@
                 <Entry Placeholder="Menge" Grid.Row="1"/>
             </Grid>
         </Border>
-        <Button Command="{Binding CMD_Back}" Style="{StaticResource ButtonSubmitMain}" BackgroundColor="#ff6666" FontSize="{StaticResource FontLarge}" Text="Rezept schließen" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <Button Text="Speichern" Style="{StaticResource ButtonSubmitMain}" FontSize="{StaticResource FontLarge}" Grid.Row="2" Grid.Column="0" Margin="20,0,5,20"/>
+        <Button Command="{Binding CMD_ShowStart}" Style="{StaticResource ButtonSubmitMain}" BackgroundColor="#ff6666" FontSize="{StaticResource FontLarge}" Text="Abbrechen" Grid.Row="2" Grid.Column="1" Margin="5,0,20,20"/>
     </Grid>
 </ContentPage>
