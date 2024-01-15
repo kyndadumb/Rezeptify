@@ -5,7 +5,7 @@ namespace Rezeptify.AppComponents
 {
     public static class DatabaseHandler
     {
-        static string databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "rezeptify.db");
+        static string databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "rezeptify.db");
 
         // Datenbankverbindung eröffnen & Tabellen erstellen falls Sie nicht existieren
         public static SqliteConnection OpenDatabaseConnection()
@@ -51,11 +51,10 @@ namespace Rezeptify.AppComponents
         {
             // Variablen
             List<Ingredients> ingredients = new();
-            conn.Open();
 
             try
             {
-                SqliteCommand loadIng_command = new("SELECT * from ingredients");
+                SqliteCommand loadIng_command = new("SELECT * from ingredients", conn);
                 SqliteDataReader reader = loadIng_command.ExecuteReader();
 
                 // while - Daten werden gelesen

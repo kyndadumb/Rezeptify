@@ -13,7 +13,8 @@ public partial class BarcodePage : ContentPage
         {
             Formats = BarcodeFormats.All,
             AutoRotate = true,
-            Multiple = false
+            Multiple = false,
+            TryHarder = true,
         };
     }
 }

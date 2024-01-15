@@ -14,7 +14,7 @@ public class StartVM : ViewModelBase
         this.CMD_ShowRecipe = new ActionCommand(ShowRecipePage);
         //TestCollection();
 
-        //LoadIngredients();
+        LoadIngredients();
     }
 
     private void ShowRecipePage()
