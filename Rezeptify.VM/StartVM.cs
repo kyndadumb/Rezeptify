@@ -1,11 +1,7 @@
-﻿using Rezeptify.VM.Models;
-using System;
-using System.Collections.Generic;
+﻿using Rezeptify.AppComponents.Models;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+using Rezeptify.AppComponents;
+using Microsoft.Data.Sqlite;
 
 namespace Rezeptify.VM;
 
@@ -16,8 +12,9 @@ public class StartVM : ViewModelBase
         this.CMD_ShowTest = new TaskCommand(ShowTestPage);
         this.CMD_ShowBarcode = new ActionCommand(ShowScanPage);
         this.CMD_ShowRecipe = new ActionCommand(ShowRecipePage);
-        TestCollection();
+        //TestCollection();
 
+        LoadIngredients();
     }
 
     private async Task ShowRecipePage()
@@ -41,6 +38,14 @@ public class StartVM : ViewModelBase
         ingredient3.Quantity = 1;
         ingredient3.Name = "Test";
         IngredientsCollection.Add(ingredient3);
+    }
+
+    private void LoadIngredients()
+    {
+        SqliteConnection sqliteConnection = DatabaseHandler.OpenDatabaseConnection();
+        List<Ingredients> list = DatabaseHandler.LoadIngredients(sqliteConnection);
+
+        foreach (Ingredients ing in list) { IngredientsCollection.Add(ing); }
     }
 
     private Task ShowScanPage()
