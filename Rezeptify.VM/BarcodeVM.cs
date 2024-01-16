@@ -25,10 +25,25 @@ public class BarcodeVM : ViewModelBase
 
     private async Task BarcodeScanned(object arg)
     {
-        var gtinHandler = new OpenGTINDBHandler("400000000");
-        var gtinInfo = await gtinHandler.GetProductInformation((string)arg ?? "");
-        var cat = gtinHandler.ReturnInfoByCategory(gtinInfo, "name");
-        BarcodeTest = cat;
+        ErrorText = "";
+        try
+        {
+            var scannedCode = (string)arg ?? "";
+            if (String.IsNullOrWhiteSpace(scannedCode)) return;
+            ErrorText = scannedCode;
+            var gtinHandler = new OpenGTINDBHandler("400000000");
+            var gtinInfo = await gtinHandler.GetProductInformation(scannedCode);
+            var cat = gtinHandler.ReturnInfoByCategory(gtinInfo, "name");
+
+            //zu neuem VM
+            var vm = new AddFoodVM(_backVM, cat, scannedCode);
+            _viewManager.Show(vm);
+        }
+        catch (Exception ex)
+        {
+
+            ErrorText = ex.Message;
+        }
     }
 
     private void GoBack()
@@ -40,7 +55,7 @@ public class BarcodeVM : ViewModelBase
     public bool TorchEnabled
     {
         get { return _TorchEnabled; }
-        set { _TorchEnabled = value; }
+        set { _TorchEnabled = value; NotifyPropertyChanged(); }
     }
 
 
@@ -49,12 +64,12 @@ public class BarcodeVM : ViewModelBase
     public TaskCommandWithPar CMD_BarcodeScanned { get; set; }
     public ActionCommand CMD_ToggleFlashlight { get; set; }
 
-    private string _BarcodeTest;
+    private string _ErrorText;
 
-    public string BarcodeTest
+    public string ErrorText
     {
-        get { return _BarcodeTest; }
-        set { _BarcodeTest = value; NotifyPropertyChanged(); }
+        get { return _ErrorText; }
+        set { _ErrorText = value; NotifyPropertyChanged(); }
     }
 
 }

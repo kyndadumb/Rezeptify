@@ -104,7 +104,7 @@ namespace Rezeptify.AppComponents
 
                 if (reader.Read()) { ingredient_id = reader.GetInt32(0); }
 
-                if (ingredient_id != null)
+                if (ingredient_id != null && !String.IsNullOrWhiteSpace(ean))
                 {
                     // EAN-Code in die DB schreiben
                     SqliteCommand ean_insert = new("INSERT INTO eancodes (eancode, ingredient_id) VALUES (@eancode, @ingredient_id)");

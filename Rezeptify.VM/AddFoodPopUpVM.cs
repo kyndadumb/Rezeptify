@@ -15,7 +15,7 @@ namespace Rezeptify.VM
 
         private void ShowAddFoodPage()
         {
-            var vm = new AddFoodVM();
+            var vm = new AddFoodVM(this);
             _viewManager.Show(vm);
         }
 
