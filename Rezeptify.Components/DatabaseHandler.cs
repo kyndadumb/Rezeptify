@@ -40,7 +40,7 @@ namespace Rezeptify.AppComponents
                 create_recipeingredients.ExecuteNonQuery();
 
                 SqliteCommand create_eancodes = conn.CreateCommand();
-                create_eancodes.CommandText = "CREATE TABLE IF NOT EXISTS eancodes ( id INTEGER NOT NULL, eancode VARCHAR(255) NOT NULL, ingredient_id INTEGER NOT NULL, PRIMARY KEY (id), CONSTRAINT '0' FOREIGN KEY (ingredient_id) REFERENCES ingredients (id) ON UPDATE NO ACTION ON DELETE NO ACTION);";
+                create_eancodes.CommandText = "CREATE TABLE IF NOT EXISTS eancodes ( id INTEGER NOT NULL, eancode VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, ingredient_id INTEGER NOT NULL, PRIMARY KEY (id), CONSTRAINT '0' FOREIGN KEY (ingredient_id) REFERENCES ingredients (id) ON UPDATE NO ACTION ON DELETE NO ACTION);";
                 create_eancodes.ExecuteNonQuery();
             }
 
@@ -123,6 +123,34 @@ namespace Rezeptify.AppComponents
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        //
+        public static string RetrieveProductNameByEAN(SqliteConnection conn, string ean)
+        {
+            // Variablen
+            string ean_code = string.Empty;
+            string name = string.Empty;
+            
+            try
+            {
+                // Prüfen ob die EAN vorhanden ist in der lokalen Datenbank vorhanden ist
+                SqliteCommand select_ean = new("SELECT name FROM eancodes WHERE eancode = @eancode", conn);
+                select_ean.Parameters.AddWithValue("@eancode", ean);
+                SqliteDataReader reader = select_ean.ExecuteReader();
+
+                // while - Reader liesst Daten
+                while (reader.Read())
+                {
+                    name = reader.GetString(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return name;
         }
     }
 }
