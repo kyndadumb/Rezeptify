@@ -1,23 +1,17 @@
 ﻿using Rezeptify.AppComponents;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rezeptify.VM;
 
 public class BarcodeVM : ViewModelBase
 {
     private ViewModelBase _backVM;
-    private bool IsScanAllowed = false;
     public BarcodeVM(ViewModelBase backVM)
     {
         _backVM = backVM;
         CMD_Back = new ActionCommand(GoBack);
         CMD_BarcodeScanned = new TaskCommandWithPar(BarcodeScanned);
         CMD_ToggleFlashlight = new ActionCommand(ToggleFlashlight);
-        IsScanAllowed = true;
+        ScanEnabled= true;
     }
 
     private void ToggleFlashlight()
@@ -33,7 +27,7 @@ public class BarcodeVM : ViewModelBase
             // gucken ob Code valide ist
             var scannedCode = (string)arg ?? "";
             if (String.IsNullOrWhiteSpace(scannedCode)) return;
-            IsScanAllowed = false;
+            ScanEnabled = false;
             ErrorText = scannedCode;
 
             //Produktkategorie für Code raussuchen
@@ -81,6 +75,14 @@ public class BarcodeVM : ViewModelBase
     {
         get { return _TorchEnabled; }
         set { _TorchEnabled = value; NotifyPropertyChanged(); }
+    }
+
+    private bool _ScanEnabled;
+
+    public bool ScanEnabled
+    {
+        get { return _ScanEnabled; }
+        set { _ScanEnabled = value; NotifyPropertyChanged(); }
     }
 
 

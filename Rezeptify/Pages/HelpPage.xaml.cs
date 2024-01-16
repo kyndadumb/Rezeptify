@@ -1,4 +1,4 @@
-namespace Rezeptify.Pages;
+namespace Rezeptify;
 
 public partial class HelpPage : ContentPage
 {

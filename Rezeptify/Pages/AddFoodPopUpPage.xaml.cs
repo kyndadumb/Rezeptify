@@ -1,6 +1,6 @@
 using CommunityToolkit.Maui.Views;
 
-namespace Rezeptify.Pages;
+namespace Rezeptify;
 
 public partial class AddFoodPopUpPage : Popup
 {

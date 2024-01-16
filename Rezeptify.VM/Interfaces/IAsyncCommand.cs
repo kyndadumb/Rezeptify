@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
-namespace Rezeptify.VM.Interfaces
+namespace Rezeptify.VM;
+
+internal interface IAsyncCommand : ICommand
 {
-    internal interface IAsyncCommand : ICommand
-    {
-        Task ExecuteAsync(object par = null);
-        bool CanExecute();
-    }
+    Task ExecuteAsync(object par = null);
+    bool CanExecute();
 }

@@ -1,9 +1,8 @@
-﻿namespace Rezeptify.AppComponents.Models
+﻿namespace Rezeptify.AppComponents;
+
+public class EanCode
 {
-    internal class EanCode
-    {
-        public int Id { get; set; }
-        public string EanCodeValue { get; set; }
-        public int IngredientId { get; set; }
-    }
+    public int Id { get; set; }
+    public string EanCodeValue { get; set; }
+    public int IngredientId { get; set; }
 }

@@ -1,9 +1,8 @@
-﻿namespace Rezeptify.AppComponents.Models
+﻿namespace Rezeptify.AppComponents;
+
+public class Recipe
 {
-    internal class Recipe
-    {
-        public int Id { get; set; }
-        public string Instructions { get; set; }
-        public string Name { get; set; }
-    }
+    public int Id { get; set; }
+    public string Instructions { get; set; }
+    public string Name { get; set; }
 }

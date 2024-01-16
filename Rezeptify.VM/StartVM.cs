@@ -1,7 +1,7 @@
-﻿using Rezeptify.AppComponents.Models;
-using System.Collections.ObjectModel;
+﻿using Microsoft.Data.Sqlite;
 using Rezeptify.AppComponents;
-using Microsoft.Data.Sqlite;
+using Rezeptify.AppComponents.Models;
+using System.Collections.ObjectModel;
 
 namespace Rezeptify.VM;
 
@@ -26,7 +26,11 @@ public class StartVM : ViewModelBase
         SqliteConnection sqliteConnection = DatabaseHandler.OpenDatabaseConnection();
         List<Ingredients> list = DatabaseHandler.LoadIngredients(sqliteConnection);
 
-        foreach (Ingredients ing in list) { IngredientsCollection.Add(ing); }
+        IngredientsCollection.Clear();
+        foreach (Ingredients ing in list)
+        {
+            IngredientsCollection.Add(ing);
+        }
     }
 
     private void ShowTestPage()
