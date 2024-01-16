@@ -2,35 +2,34 @@
 using Rezeptify.VM;
 using Components = Rezeptify.AppComponents.Components;
 
-namespace Rezeptify
+namespace Rezeptify;
+
+public partial class EntryPoint : ContentPage
 {
-    public partial class EntryPoint : ContentPage
+
+    public EntryPoint()
     {
-
-        public EntryPoint()
+        try
         {
-            try
-            {
-                InitializeComponent();
-                LoadComponents();
-                var vm = new StartVM();
-                var viewManager = Components.GetService<IViewManager>();
-                viewManager.Show(vm);
-            }
-            catch (Exception ex)
-            {
-                this.ErrorLbl.Text = ex.Message + Environment.NewLine + (ex.InnerException?.Message ?? "");
-            }
+            InitializeComponent();
+            LoadComponents();
+            var vm = new StartVM();
+            var viewManager = Components.GetService<IViewManager>();
+            viewManager.Show(vm);
         }
-
-        private void LoadComponents()
+        catch (Exception ex)
         {
-            Components.RegisterService(typeof(IFileManager),new FileManager()); 
-
-            var dgt = new ViewModelResolver(VMResolver.Resolve);
-            var shell = (Shell)App.Current!.MainPage;
-            var viewManager = new ViewManager(dgt, shell);
-            Components.RegisterService(typeof(IViewManager),viewManager);
+            this.ErrorLbl.Text = ex.Message + Environment.NewLine + (ex.InnerException?.Message ?? "");
         }
+    }
+
+    private void LoadComponents()
+    {
+        Components.RegisterService(typeof(IFileManager),new FileManager()); 
+
+        var dgt = new ViewModelResolver(VMResolver.Resolve);
+        var shell = (Shell)App.Current!.MainPage;
+        var viewManager = new ViewManager(dgt, shell);
+        Components.RegisterService(typeof(IViewManager),viewManager);
     }
 }

@@ -1,10 +1,5 @@
-﻿using Rezeptify.AppComponents.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Rezeptify.AppComponents;
+﻿using Rezeptify.AppComponents;
+using Rezeptify.AppComponents.Models;
 
 namespace Rezeptify.VM
 {
