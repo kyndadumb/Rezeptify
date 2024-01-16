@@ -90,7 +90,7 @@ namespace Rezeptify.AppComponents
         }
 
         // neue Zutat hinzufügen
-        public static void AddIngredients(string name, double quantity, string unit, string ean, SqliteConnection conn)
+        public static async Task AddIngredients(string name, double quantity, string unit, string ean, SqliteConnection conn)
         {
             // Variablen
             int? ingredient_id = null;
@@ -102,11 +102,11 @@ namespace Rezeptify.AppComponents
                 ing_insert.Parameters.AddWithValue("@name", name);
                 ing_insert.Parameters.AddWithValue("@quantity", quantity);
                 ing_insert.Parameters.AddWithValue("@unit", unit);
-                ing_insert.ExecuteNonQuery();
+                await ing_insert.ExecuteNonQueryAsync();
 
                 // max Ingredient_ID holen => aktuell hinzugefügte Zutat
                 SqliteCommand ing_id_select = new("SELECT MAX(id) from ingredients",conn);
-                SqliteDataReader reader = ing_id_select.ExecuteReader();
+                SqliteDataReader reader = await ing_id_select.ExecuteReaderAsync();
 
                 if (reader.Read()) { ingredient_id = reader.GetInt32(0); }
 
@@ -116,7 +116,7 @@ namespace Rezeptify.AppComponents
                     SqliteCommand ean_insert = new("INSERT INTO eancodes (eancode, ingredient_id) VALUES (@eancode, @ingredient_id)");
                     ean_insert.Parameters.AddWithValue("@eancode", ean);
                     ean_insert.Parameters.AddWithValue("@ingredient_id", ingredient_id);
-                    ean_insert.ExecuteNonQuery();
+                    await ean_insert.ExecuteNonQueryAsync();
                 }
             }
             catch (Exception ex)
