@@ -8,7 +8,24 @@
     <Grid Style="{StaticResource GridBackground}">
         <Label Text="Hilfe" Grid.Row="0" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" FontSize="{StaticResource FontLarge}" TextColor="White"/>
         <Border Stroke="Black" StrokeThickness="3" BackgroundColor="#dedede" Grid.ColumnSpan="2" Grid.Row="1" Margin="20,0">
-            <Label Text="Bitte Helfen Sie mir, ich bin in Gefahr!" FontSize="{StaticResource FontSmall}" Margin="15"/>
+            <ScrollView>
+                <Label FontSize="{StaticResource FontSmall}" Margin="15">
+                    <Label.Text>
+Auf der Startseite sehen Sie eine Übersicht der von Ihnen angelegten Lebensmittel. Wenn Sie noch keine Lebensmittel eingetragen haben, können Sie unten auf "Lebensmittel hinzufügen" klicken und den Barcode eines Lebensmittels einscannen oder das Lebensmittel per Hand eintragen.            
+Nachdem Sie ein Lebensmittel eingescannt haben oder wenn Sie es manuell anlegen möchten, werden Sie auf die "Lebensmittel hinzufügen"-Seite weitergeleitet.
+
+Hier müssen Sie die Art des Lebensmittels und die Menge angeben.
+Bei der Lebensmittelart reicht es aus anzugeben, ob es sich z.B. um einen Apfel, um Käse oder Butter handelt. Genaue Markenbezeichnungen etc. sind nicht notwendig. Nun müssen Sie unter dem Feld der Mengeneinheiten eine Einheit aus der Liste auswählen.
+                        
+Weiterhin können Sie die unter dem Barcode notierte EAN des Lebensmittels angeben, falls vorhanden. Dadurch können Sie das Lebensmittel in Zukunft über den Barcode-Scanner einscannen.
+Wenn Sie das Lebensmittel abspeichern wollen, klicken Sie auf "Speichern". Ansonsten klicken Sie auf "Abbrechen", um den Vorgang abzubrechen.
+
+Über die Schaltfäche "Rezepte" oben auf der Seite können Sie sich aus Ihren Lebensmitteln ein Rezept generieren lassen. Klicken Sie dazu einfach die gewünschten Zutaten an und tippen Sie anschließend auf die Fläche "Rezept erstellen".
+
+
+                    </Label.Text>
+                </Label>
+            </ScrollView>
         </Border>
         <Button Command="{Binding CMD_Back}" Style="{StaticResource ButtonSubmitMain}" BackgroundColor="#ff6666" Text="Schließen" Grid.Row="2" Grid.ColumnSpan="2" FontSize="{StaticResource FontLarge}" Margin="20,15"/>
     </Grid>
