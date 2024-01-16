@@ -10,28 +10,16 @@ public class StartVM : ViewModelBase
     public StartVM()
     {
         this.CMD_ShowTest = new ActionCommand(ShowTestPage);
-        //this.CMD_ShowBarcode = new ActionCommand(ShowScanPage);
         this.CMD_ShowRecipe = new ActionCommand(ShowRecipePage);
         this.CMD_ShowPopUp = new ActionCommand(ShowAddFoodPopUpPage);
-        //TestCollection();
 
-        LoadIngredients();
+        
     }
 
-    private void TestCollection()
+    public override Task OnShow()
     {
-        Ingredients ingredient1 = new Ingredients();
-        ingredient1.Quantity = 1;
-        ingredient1.Name = "Test";
-        IngredientsCollection.Add(ingredient1);
-        Ingredients ingredient2 = new Ingredients();
-        ingredient2.Quantity = 1;
-        ingredient2.Name = "Superultramegalangertest";
-        IngredientsCollection.Add(ingredient2);
-        Ingredients ingredient3 = new Ingredients();
-        ingredient3.Quantity = 1;
-        ingredient3.Name = "Test";
-        IngredientsCollection.Add(ingredient3);
+        LoadIngredients();
+        return base.OnShow();
     }
 
     private void LoadIngredients()
@@ -40,12 +28,6 @@ public class StartVM : ViewModelBase
         List<Ingredients> list = DatabaseHandler.LoadIngredients(sqliteConnection);
 
         foreach (Ingredients ing in list) { IngredientsCollection.Add(ing); }
-    }
-
-    private void ShowScanPage()
-    {
-        var vm = new BarcodeVM(this);
-        _viewManager.Show(vm);
     }
 
     private void ShowTestPage()

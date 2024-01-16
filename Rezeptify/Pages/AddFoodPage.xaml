@@ -10,8 +10,19 @@
         <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="20,10,20,20" Stroke="Black" StrokeThickness="3" BackgroundColor="#dedede">
             <Grid RowDefinitions="auto,auto,auto,auto" RowSpacing="10" Margin="20">
                 <Entry Placeholder="Lebensmittel" Text="{Binding Kategorie}" Grid.Row="0" PlaceholderColor="#aa454545"/>
-                <Entry Placeholder="Menge" Text="{Binding Menge}" Grid.Row="1" PlaceholderColor="#aa454545"/>
-                <Entry Placeholder="Mengeneinheit" Text="{Binding Unit}" Grid.Row="2" PlaceholderColor="#aa454545"/>
+                <Entry Placeholder="Menge" Text="{Binding Menge}" Grid.Row="1" PlaceholderColor="#aa454545" Keyboard="Numeric"/>
+                <!--<Entry Placeholder="Mengeneinheit" Text="{Binding Unit}" Grid.Row="2" PlaceholderColor="#aa454545"/>-->
+                <Picker SelectedItem="{Binding Unit}" Grid.Row="2" Title="Mengeneinheit auswählen">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>l</x:String>
+                            <x:String>ml</x:String>
+                            <x:String>kg</x:String>
+                            <x:String>g</x:String>
+                            <x:String>Stk</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
                 <Entry Placeholder="Barcode (optional)" Text="{Binding EANCode}" Grid.Row="3" PlaceholderColor="#aa454545"/>
             </Grid>
         </Border>

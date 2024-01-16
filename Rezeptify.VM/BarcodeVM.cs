@@ -10,12 +10,14 @@ namespace Rezeptify.VM;
 public class BarcodeVM : ViewModelBase
 {
     private ViewModelBase _backVM;
+    private bool IsScanAllowed = false;
     public BarcodeVM(ViewModelBase backVM)
     {
         _backVM = backVM;
         CMD_Back = new ActionCommand(GoBack);
         CMD_BarcodeScanned = new TaskCommandWithPar(BarcodeScanned);
         CMD_ToggleFlashlight = new ActionCommand(ToggleFlashlight);
+        IsScanAllowed = true;
     }
 
     private void ToggleFlashlight()
@@ -30,6 +32,7 @@ public class BarcodeVM : ViewModelBase
         {
             var scannedCode = (string)arg ?? "";
             if (String.IsNullOrWhiteSpace(scannedCode)) return;
+            IsScanAllowed = false;
             ErrorText = scannedCode;
             var gtinHandler = new OpenGTINDBHandler("400000000");
             var gtinInfo = await gtinHandler.GetProductInformation(scannedCode);
