@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using Rezeptify.AppComponents.Models;
+using System.Collections.ObjectModel;
 
 namespace Rezeptify.AppComponents;
 
@@ -150,6 +151,17 @@ public static class DatabaseHandler
             Console.WriteLine(ex.Message);
         }
 
-            return name;
+        return name;
+    }
+
+    // benutzte Produkte aus der Datenbank für den Bestand entfernen
+    public static void DeleteProduct(Ingredients[] ingredients, SqliteConnection conn)
+    {
+        foreach (Ingredients ingredient in ingredients)
+        {
+            SqliteCommand cmd = new("DELETE FROM ingredients where id = @id", conn);
+            cmd.Parameters.AddWithValue("@id", ingredient.Id);
+            cmd.ExecuteNonQuery();
+        }
     }
 }
