@@ -11,7 +11,7 @@ public class BarcodeVM : ViewModelBase
         CMD_Back = new ActionCommand(GoBack);
         CMD_BarcodeScanned = new TaskCommandWithPar(BarcodeScanned);
         CMD_ToggleFlashlight = new ActionCommand(ToggleFlashlight);
-        ScanEnabled= true;
+        ScanEnabled = true;
     }
 
     private void ToggleFlashlight()

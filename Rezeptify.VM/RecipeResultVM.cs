@@ -27,10 +27,27 @@ namespace Rezeptify.VM
 
         private async Task CreateRecipe(Ingredients[] selected_ingredients)
         {
-            ChefGPTHandler chefGPTHandler = new();
-            RecipeRequest recipe_request = chefGPTHandler.CreateRecipieRequest(selected_ingredients, null, null, null, null, null);
-            string recipe = await chefGPTHandler.RequestRecipe(recipe_request);
-            string instructions = chefGPTHandler.ExtractInstructionSet(recipe);
+            InstructionsText = "";
+            try
+            {
+                ChefGPTHandler chefGPTHandler = new();
+                RecipeRequest recipe_request = chefGPTHandler.CreateRecipieRequest(selected_ingredients, null, null, null, null, null);
+                string recipe = await chefGPTHandler.RequestRecipe(recipe_request);
+                string instructions = chefGPTHandler.ExtractInstructionSet(recipe);
+                InstructionsText = instructions;
+            }
+            catch (Exception ex) 
+            {
+                InstructionsText = ex.Message;
+            }
+        }
+
+        private string _InstructionsText;
+
+        public string InstructionsText
+        {
+            get { return _InstructionsText; }
+            set { _InstructionsText = value; NotifyPropertyChanged(); }
         }
 
         public ActionCommand CMD_Back { get; set; } 

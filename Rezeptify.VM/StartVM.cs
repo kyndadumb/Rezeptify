@@ -35,13 +35,13 @@ public class StartVM : ViewModelBase
 
     private void ShowTestPage()
     {
-        var vm = new TestPageVM(this);
+        TestPageVM vm = new TestPageVM(this);
         this._viewManager.Show(vm);
     }
 
     private void ShowAddFoodPopUpPage()
     {
-        var vm = new AddFoodPopUpVM();
+        AddFoodPopUpVM vm = new AddFoodPopUpVM();
         _viewManager.ShowPopUp(vm);
     }
 
