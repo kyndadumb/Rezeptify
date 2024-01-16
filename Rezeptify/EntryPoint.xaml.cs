@@ -1,7 +1,5 @@
-﻿
-using Rezeptify.AppComponents;
+﻿using Rezeptify.AppComponents;
 using Rezeptify.VM;
-using Rezeptify.VM.Interfaces;
 using Components = Rezeptify.AppComponents.Components;
 
 namespace Rezeptify
@@ -14,8 +12,8 @@ namespace Rezeptify
             try
             {
                 InitializeComponent();
-
                 LoadComponents();
+                CheckLocalFilesDirectory();
                 var vm = new StartVM();
                 var viewManager = Components.GetService<IViewManager>();
                 viewManager.Show(vm);
@@ -34,6 +32,17 @@ namespace Rezeptify
             var shell = (Shell)App.Current!.MainPage;
             var viewManager = new ViewManager(dgt, shell);
             Components.RegisterService(typeof(IViewManager),viewManager);
+        }
+
+        private static void CheckLocalFilesDirectory()
+        {
+            FileManager? service = Components.GetService<FileManager>();
+            string appdata_path = Path.Combine(service.GetAppDataDir(), "Rezeptify");
+
+            if (!Directory.Exists(appdata_path))
+            {
+                Directory.CreateDirectory(appdata_path);
+            }
         }
     }
 }

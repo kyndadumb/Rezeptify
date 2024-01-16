@@ -1,20 +1,27 @@
 ﻿using Microsoft.Data.Sqlite;
 using Rezeptify.AppComponents.Models;
+using Rezeptify.AppComponents;
 
 namespace Rezeptify.AppComponents
 {
     public static class DatabaseHandler
     {
-        static string databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "rezeptify.db");
-
         // Datenbankverbindung eröffnen & Tabellen erstellen falls Sie nicht existieren
         public static SqliteConnection OpenDatabaseConnection()
         {
+            IFileManager? service = Components.GetService<IFileManager>();
+            string appdata_path = Path.Combine(service.GetAppDataDir(), "Rezeptify");
+            string databasePath = Path.Combine(appdata_path, "rezeptify.db");
+
             // Variablen
-            SqliteConnection conn = new($"Data Source={databasePath}");
-            
+            SqliteConnection conn = null;
+
             try
             {
+                if (!File.Exists(databasePath)) {File.Create(databasePath);}
+                
+                conn = new($"Data Source={databasePath}");
+
                 conn.Open();
 
                 // if - Datenbankconnection nicht eröffnet -> Fehler werfen

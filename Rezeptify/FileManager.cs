@@ -8,5 +8,10 @@ namespace Rezeptify
         {
             return FileSystem.AppDataDirectory;
         }
+
+        public string GetAppDataDir()
+        {
+            return FileSystem.AppDataDirectory;
+        }
     }
 }
