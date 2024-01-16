@@ -10,12 +10,14 @@ namespace Rezeptify.VM;
 public class BarcodeVM : ViewModelBase
 {
     private ViewModelBase _backVM;
+    private bool IsScanAllowed = false;
     public BarcodeVM(ViewModelBase backVM)
     {
         _backVM = backVM;
         CMD_Back = new ActionCommand(GoBack);
         CMD_BarcodeScanned = new TaskCommandWithPar(BarcodeScanned);
         CMD_ToggleFlashlight = new ActionCommand(ToggleFlashlight);
+        IsScanAllowed = true;
     }
 
     private void ToggleFlashlight()
@@ -28,14 +30,21 @@ public class BarcodeVM : ViewModelBase
         ErrorText = "";
         try
         {
+            // gucken ob Code valide ist
             var scannedCode = (string)arg ?? "";
             if (String.IsNullOrWhiteSpace(scannedCode)) return;
+            IsScanAllowed = false;
             ErrorText = scannedCode;
-            var gtinHandler = new OpenGTINDBHandler("400000000");
-            var gtinInfo = await gtinHandler.GetProductInformation(scannedCode);
-            var cat = gtinHandler.ReturnInfoByCategory(gtinInfo, "name");
 
-            //zu neuem VM
+            //Produktkategorie für Code raussuchen
+            string cat = SearchLocalDBforEAN(scannedCode); //in der lokalen Datenbank nach Code gucken
+            if (String.IsNullOrWhiteSpace(cat)) 
+            {
+                cat = await SearchOpenGTIN(scannedCode); //in OpenGTIN nach Code suchen
+            }
+
+
+            //zur Mengeneingabe
             var vm = new AddFoodVM(_backVM, cat, scannedCode);
             _viewManager.Show(vm);
         }
@@ -44,6 +53,22 @@ public class BarcodeVM : ViewModelBase
 
             ErrorText = ex.Message;
         }
+    }
+
+    private static string SearchLocalDBforEAN(string scannedCode)
+    {
+        using (var conn = DatabaseHandler.OpenDatabaseConnection())
+        {
+            return DatabaseHandler.RetrieveProductNameByEAN(conn, scannedCode);
+        }
+    }
+
+    private static async Task<string> SearchOpenGTIN(string scannedCode)
+    {
+        var gtinHandler = new OpenGTINDBHandler("400000000");
+        var gtinInfo = await gtinHandler.GetProductInformation(scannedCode);
+        var cat = gtinHandler.ReturnInfoByCategory(gtinInfo, "name");
+        return cat;
     }
 
     private void GoBack()

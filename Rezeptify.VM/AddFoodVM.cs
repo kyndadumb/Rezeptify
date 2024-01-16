@@ -15,6 +15,7 @@ namespace Rezeptify.VM
         public AddFoodVM(ViewModelBase vm, string kat, string eancode)
         {
             _Kategorie = kat;
+            _EANCode = eancode;
             _backVM = vm;
             CMD_Accept = new TaskCommand(AcceptChanges);
             this.CMD_ShowStart = new ActionCommand(showStartPage);
@@ -30,7 +31,7 @@ namespace Rezeptify.VM
 
             using (var conn = DatabaseHandler.OpenDatabaseConnection())
             {
-                DatabaseHandler.AddIngredients(Kategorie, Menge.Value, Unit, EANCode,conn);
+                await DatabaseHandler.AddIngredients(Kategorie, Menge.Value, Unit, EANCode,conn);
 
                 _viewManager.Show(_backVM);
             }

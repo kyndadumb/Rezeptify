@@ -21,7 +21,7 @@ namespace Rezeptify.VM
 
         private void ShowScanPage()
         {
-            var vm = new BarcodeVM(this);
+            var vm = new BarcodeVM(new StartVM());
             _viewManager.Show(vm);
         }
 

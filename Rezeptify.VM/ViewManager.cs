@@ -46,21 +46,24 @@ public class ViewManager : IViewManager
 
     private async Task LeavePage(Page pageToLeave)
     {
-        ViewModelBase vm;
+        ViewModelBase? vm;
         if (pageToLeave != null)
         {
-            //hier kann ein OnLeave Event vom ViewModel verlinkt werden
-            await Task.Delay(0);
+            vm = pageToLeave.BindingContext as ViewModelBase;
+            if (vm == null) return;
+            pageToLeave.BindingContext = null;
+            await vm.OnLeave();
         }
     }
 
     private async Task EnterPage(Page pageToEnter)
     {
-        ViewModelBase vm;
+        ViewModelBase? vm;
         if (pageToEnter != null)
         {
-            //hier kann ein OnShow Event vom ViewModel verlinkt werden
-            await Task.Delay(0);
+            vm = pageToEnter.BindingContext as ViewModelBase;
+            if (vm == null) return;
+            await vm.OnShow();
         }
     }
 

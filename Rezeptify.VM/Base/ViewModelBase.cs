@@ -25,4 +25,14 @@ public class ViewModelBase : INotifyPropertyChanged
     {
         _viewManager = Components.GetService<IViewManager>();
     }
+
+    public virtual async Task OnShow()
+    {
+        await Task.Delay(0);
+    }
+
+    public virtual async Task OnLeave()
+    {
+        await Task.Delay(0);
+    }
 }
