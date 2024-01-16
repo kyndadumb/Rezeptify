@@ -100,7 +100,7 @@ namespace Rezeptify.AppComponents
                 // Lebensmittel hinzufügen
                 SqliteCommand ing_insert = new("INSERT INTO ingredients (name, quantity, unit) VALUES (@name, @quantity, @unit)",conn);
                 ing_insert.Parameters.AddWithValue("@name", name);
-                ing_insert.Parameters.AddWithValue("@quantity", quantity);
+                ing_insert.Parameters.AddWithValue("@quantity", Math.Round(quantity, 2));
                 ing_insert.Parameters.AddWithValue("@unit", unit);
                 await ing_insert.ExecuteNonQueryAsync();
 
