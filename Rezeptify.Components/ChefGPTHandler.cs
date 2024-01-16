@@ -2,12 +2,12 @@
 
 namespace Rezeptify.AppComponents
 {
-    internal class ChefGPTHandler
+    public class ChefGPTHandler
     {
-        private string API_KEY = "24a52c5f-2007-4e4c-ba5d-d8d1cf93c0a2";
-        private string BASE_URL = "https://api.chefgpt.com/";
+        private static string API_KEY = "24a52c5f-2007-4e4c-ba5d-d8d1cf93c0a2";
+        private static string BASE_URL = "https://api.chefgpt.com/";
 
-        public async Task<string> RequestRecipe()
+        public static async Task<string> RequestRecipe()
         {
             string result = null;
 

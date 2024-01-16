@@ -25,7 +25,7 @@ namespace Rezeptify.VM
         private void ShowRecipeResultPage()
         {
             var ingredients = ConvertSelectedCollection();
-            var vm = new RecipeResultVM(this);
+            var vm = new RecipeResultVM(this,ingredients);
             _viewManager.Show(vm);
         }
 
