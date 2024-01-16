@@ -113,7 +113,7 @@ namespace Rezeptify.AppComponents
                 if (ingredient_id != null && !string.IsNullOrWhiteSpace(ean))
                 {
                     // EAN-Code in die DB schreiben
-                    SqliteCommand ean_insert = new("INSERT INTO eancodes (eancode, ingredient_id, name) VALUES (@eancode, @ingredient_id, @name)");
+                    SqliteCommand ean_insert = new("INSERT INTO eancodes (eancode, ingredient_id, name) VALUES (@eancode, @ingredient_id, @name)", conn);
                     ean_insert.Parameters.AddWithValue("@eancode", ean);
                     ean_insert.Parameters.AddWithValue("@ingredient_id", ingredient_id);
                     ean_insert.Parameters.AddWithValue("@name", name);
@@ -153,5 +153,7 @@ namespace Rezeptify.AppComponents
 
             return name;
         }
+
+
     }
 }

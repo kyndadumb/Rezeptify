@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Rezeptify.AppComponents.Models;
+using Rezeptify.AppComponents;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +20,14 @@ namespace Rezeptify.VM
         private void BackToRecipe()
         {
             _viewManager.Show(_backVM);
+        }
+
+        private async Task CreateRecipe(Ingredients[] selected_ingredients)
+        {
+            ChefGPTHandler chefGPTHandler = new();
+            RecipeRequest recipe_request = chefGPTHandler.CreateRecipieRequest(selected_ingredients, null, null, null, null, null);
+            string recipe = await chefGPTHandler.RequestRecipe(recipe_request);
+            string instructions = chefGPTHandler.ExtractInstructionSet(recipe);
         }
 
         public ActionCommand CMD_Back { get; set; } 
