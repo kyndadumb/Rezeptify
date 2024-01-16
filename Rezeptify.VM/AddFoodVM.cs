@@ -17,6 +17,7 @@ namespace Rezeptify.VM
             _Kategorie = kat;
             _backVM = vm;
             CMD_Accept = new TaskCommand(AcceptChanges);
+            this.CMD_ShowStart = new ActionCommand(showStartPage);
         }
 
         private async Task AcceptChanges()
