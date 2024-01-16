@@ -17,7 +17,7 @@ public class ViewManager : IViewManager
         _Resolve = resolver;
         _rootPage = shell;
 
-        Application.Current.PageAppearing += async (sender, e) =>
+        Application.Current.PageAppearing += async (sender, e) =>  //Hook für OnShow
         {
             Exception exc;
             try
@@ -30,7 +30,7 @@ public class ViewManager : IViewManager
             }
         };
 
-        Application.Current.PageDisappearing += async (sender, e) =>
+        Application.Current.PageDisappearing += async (sender, e) => //Hook für OnLeave
         {
             Exception exc;
             try
@@ -44,19 +44,19 @@ public class ViewManager : IViewManager
         };
     }
 
-    private async Task LeavePage(Page pageToLeave)
+    private async Task LeavePage(Page pageToLeave) //OnLeave Funktion des VMs aufrufen wenn die Seite geschlossen wird
     {
         ViewModelBase? vm;
         if (pageToLeave != null)
         {
             vm = pageToLeave.BindingContext as ViewModelBase;
             if (vm == null) return;
-            pageToLeave.BindingContext = null;
+            //pageToLeave.BindingContext = null;
             await vm.OnLeave();
         }
     }
 
-    private async Task EnterPage(Page pageToEnter)
+    private async Task EnterPage(Page pageToEnter) //OnShow Funktion des VMs aufrufen wenn die Seite geöffnet wird
     {
         ViewModelBase? vm;
         if (pageToEnter != null)
