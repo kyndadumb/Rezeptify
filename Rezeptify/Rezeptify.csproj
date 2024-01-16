@@ -92,6 +92,9 @@
 		<MauiXaml Update="Pages\AddFoodPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Pages\AddFoodPopUpPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Pages\BarcodePage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

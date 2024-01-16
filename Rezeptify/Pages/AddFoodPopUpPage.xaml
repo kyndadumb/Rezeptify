@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Rezeptify.Pages.AddFoodPopUpPage"
+               VerticalOptions="Center"
+             Color="#af696969">
+    <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="20" Stroke="Black" StrokeThickness="3">
+        <Grid RowDefinitions="auto,auto" Background="Transparent">
+            <Button Text="Barcode Scannen" Command="{Binding CMD_ShowBarcode}" BackgroundColor="#23be66" TextColor="Black" Grid.Row="0" Margin="15" FontSize="{StaticResource FontLarge}" Clicked="Button_Clicked"/>
+            <Button Text="manuell hinzufügen" Command="{Binding CMD_ShowAddFood}" BackgroundColor="#23be66" TextColor="Black"  Grid.Row="1" Margin="15" FontSize="{StaticResource FontLarge}" Clicked="Button_Clicked"/>
+        </Grid>
+    </Border>
+</toolkit:Popup>

@@ -28,7 +28,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Border>
-        <Button Style="{StaticResource ButtonSubmitMain}" FontSize="{StaticResource FontLarge}" Text="Lebensmittel hinzufügen" Grid.Row="2" Grid.ColumnSpan="2" Command="{Binding CMD_ShowBarcode}"/>
+        <Button Style="{StaticResource ButtonSubmitMain}" FontSize="{StaticResource FontLarge}" Text="Lebensmittel hinzufügen" Grid.Row="2" Grid.ColumnSpan="2" Command="{Binding CMD_ShowPopUp}"/>
     </Grid>
 
 </ContentPage>

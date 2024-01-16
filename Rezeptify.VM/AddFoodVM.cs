@@ -1,9 +1,4 @@
 ﻿using Rezeptify.AppComponents;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rezeptify.VM
 {
@@ -14,6 +9,7 @@ namespace Rezeptify.VM
         {
             _backVM = vm;
             CMD_Accept = new TaskCommand(AcceptChanges);
+            this.CMD_ShowStart = new ActionCommand(showStartPage);
         }
 
         public AddFoodVM(ViewModelBase vm, string kat, string eancode)
@@ -70,6 +66,12 @@ namespace Rezeptify.VM
 
         public TaskCommand CMD_Accept { get; set; }
 
+        private void showStartPage()
+        {
+            var vm = new StartVM();
+            _viewManager.Show(vm);
+        }
 
+        public ActionCommand CMD_ShowStart {  get; set; }
     }
 }
