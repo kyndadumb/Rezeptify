@@ -1,7 +1,5 @@
-﻿
-using Rezeptify.AppComponents;
+﻿using Rezeptify.AppComponents;
 using Rezeptify.VM;
-using Rezeptify.VM.Interfaces;
 using Components = Rezeptify.AppComponents.Components;
 
 namespace Rezeptify
@@ -14,7 +12,6 @@ namespace Rezeptify
             try
             {
                 InitializeComponent();
-
                 LoadComponents();
                 var vm = new StartVM();
                 var viewManager = Components.GetService<IViewManager>();
