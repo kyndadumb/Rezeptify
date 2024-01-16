@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Rezeptify.AppComponents;
+using Rezeptify.AppComponents.Models;
 
 namespace Rezeptify.VM
 {
@@ -19,7 +16,7 @@ namespace Rezeptify.VM
 
         public override async Task OnShow()
         {
-            await ChefGPTHandler.RequestRecipe();
+            await CreateRecipe(_ingredients);
             await base.OnShow();
         }
 
