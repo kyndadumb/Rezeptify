@@ -90,7 +90,7 @@ namespace Rezeptify.AppComponents
         }
 
         // neue Zutat hinzufügen
-        public static void AddIngredients(string name, float quantity, string unit, string ean)
+        public static void AddIngredients(string name, float quantity, string unit, string ean, SqliteConnection conn)
         {
             // Variablen
             int? ingredient_id = null;
@@ -98,7 +98,7 @@ namespace Rezeptify.AppComponents
             try
             {
                 // Lebensmittel hinzufügen
-                SqliteCommand ing_insert = new("INSERT INTO ingredients (name, quantity, unit) VALUES (@name, @quantity, @unit)");
+                SqliteCommand ing_insert = new("INSERT INTO ingredients (name, quantity, unit) VALUES (@name, @quantity, @unit)",conn);
                 ing_insert.Parameters.AddWithValue("@name", name);
                 ing_insert.Parameters.AddWithValue("@quantity", quantity);
                 ing_insert.Parameters.AddWithValue("@unit", unit);
@@ -106,7 +106,7 @@ namespace Rezeptify.AppComponents
 
                 // max Ingredient_ID holen => aktuell hinzugefügte Zutat
                 SqliteCommand ing_id_select = new("SELECT MAX(ingredient_id) from ingredients");
-                SqliteDataReader reader = ing_insert.ExecuteReader();
+                SqliteDataReader reader = ing_id_select.ExecuteReader();
 
                 if (reader.Read()) { ingredient_id = reader.GetInt32(0); }
 

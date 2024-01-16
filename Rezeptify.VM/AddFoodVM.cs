@@ -29,7 +29,7 @@ namespace Rezeptify.VM
 
             using (var conn = DatabaseHandler.OpenDatabaseConnection())
             {
-                DatabaseHandler.AddIngredients(Kategorie, Menge.Value, Unit, EANCode);
+                DatabaseHandler.AddIngredients(Kategorie, Menge.Value, Unit, EANCode,conn);
 
                 _viewManager.Show(_backVM);
             }
