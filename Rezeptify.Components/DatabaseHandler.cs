@@ -60,7 +60,7 @@ namespace Rezeptify.AppComponents
 
             try
             {
-                SqliteCommand loadIng_command = new("SELECT * from ingredients", conn);
+                SqliteCommand loadIng_command = new("SELECT id, name, quantity, unit from ingredients", conn);
                 SqliteDataReader reader = loadIng_command.ExecuteReader();
 
                 // while - Daten werden gelesen
@@ -71,8 +71,8 @@ namespace Rezeptify.AppComponents
                     {
                         Id = reader.GetInt32(0),
                         Name = reader.GetString(1),
-                        Quantity = reader.GetFloat(3),
-                        Unit = reader.GetString(2)
+                        Quantity = reader.GetDouble(2),
+                        Unit = reader.GetString(3)
                     };
 
                     // Ingredient zur Liste hinzufügen
@@ -90,7 +90,7 @@ namespace Rezeptify.AppComponents
         }
 
         // neue Zutat hinzufügen
-        public static void AddIngredients(string name, float quantity, string unit, string ean, SqliteConnection conn)
+        public static void AddIngredients(string name, double quantity, string unit, string ean, SqliteConnection conn)
         {
             // Variablen
             int? ingredient_id = null;
@@ -110,7 +110,7 @@ namespace Rezeptify.AppComponents
 
                 if (reader.Read()) { ingredient_id = reader.GetInt32(0); }
 
-                if (ingredient_id != null && !String.IsNullOrWhiteSpace(ean))
+                if (ingredient_id != null && !string.IsNullOrWhiteSpace(ean))
                 {
                     // EAN-Code in die DB schreiben
                     SqliteCommand ean_insert = new("INSERT INTO eancodes (eancode, ingredient_id) VALUES (@eancode, @ingredient_id)");

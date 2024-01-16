@@ -1,5 +1,4 @@
-﻿using Android.App;
-using Rezeptify.AppComponents;
+﻿using Rezeptify.AppComponents;
 
 namespace Rezeptify
 {
