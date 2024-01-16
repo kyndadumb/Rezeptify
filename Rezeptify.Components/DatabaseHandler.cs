@@ -151,6 +151,5 @@ public static class DatabaseHandler
         }
 
             return name;
-        }
     }
 }
