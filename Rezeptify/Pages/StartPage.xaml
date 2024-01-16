@@ -18,8 +18,8 @@
             <CollectionView BackgroundColor="#dedede" ItemsSource="{Binding IngredientsCollection}">
                 <CollectionView.Header>
                     <Grid ColumnDefinitions="2*,*">
-                        <Label FontSize="{StaticResource FontMedium}" Text="Bezeichnung" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,15"/>
-                        <Label FontSize="{StaticResource FontMedium}" Text="Menge" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Label FontSize="{StaticResource FontMedium}" Text="Bezeichnung" Grid.Column="0" VerticalOptions="Center" Margin="20,15"/>
+                        <Label FontSize="{StaticResource FontMedium}" Text="Menge" Grid.Column="1" VerticalOptions="Center" Margin="20,15"/>
                     </Grid>
                 </CollectionView.Header>
                 <CollectionView.ItemTemplate>
