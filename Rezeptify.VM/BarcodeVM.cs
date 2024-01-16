@@ -27,6 +27,7 @@ public class BarcodeVM : ViewModelBase
 
     private async Task BarcodeScanned(object arg)
     {
+        if (IsScanAllowed == false) return;
         ErrorText = "";
         try
         {
