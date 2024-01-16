@@ -64,7 +64,7 @@ public class ViewManager : IViewManager
         }
     }
 
-    public async void Show(object vm,bool hasAnimation = true)
+    public async void Show(object vm, bool hasAnimation = true)
     {
         var targetIndex = FindBackStackIndex((ViewModelBase)vm, _rootPage); //Ist die Seite die geöffnet werden soll schon im NavigationStack?
         if (targetIndex == -1) //Nein -> Seite neu öffnen
@@ -72,7 +72,7 @@ public class ViewManager : IViewManager
             var type = _Resolve((ViewModelBase)vm);
             if (type == null) throw new Exception($"Kein View für {vm.GetType().ToString} gefunden");
 
-            await NavToPage(type, vm,hasAnimation);
+            await NavToPage(type, vm, hasAnimation);
         }
         else  //ja -> Zu der Seite zurücknavigieren
         {
@@ -81,7 +81,7 @@ public class ViewManager : IViewManager
                 var pages = _rootPage.Navigation.NavigationStack;
                 var pagesBackStack = pages.ToList();
                 pagesBackStack.RemoveAt(pagesBackStack.Count - 1);
-                var maxIndex = pagesBackStack.Count()-1;
+                var maxIndex = pagesBackStack.Count() - 1;
 
                 if (maxIndex > targetIndex)
                 {
@@ -122,7 +122,10 @@ public class ViewManager : IViewManager
     {
         var pageInstance = (Page)System.Activator.CreateInstance(type)!;
         pageInstance.BindingContext = vm;
-        await _rootPage.Navigation.PushAsync(pageInstance,hasAnimation);
+        MainThread.BeginInvokeOnMainThread(async () =>
+        {
+            await _rootPage.Navigation.PushAsync(pageInstance, hasAnimation);
+        });
     }
 
     public async Task HandleErrorAsync(Exception ex)
