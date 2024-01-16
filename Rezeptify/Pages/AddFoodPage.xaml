@@ -8,11 +8,11 @@
     <Grid Style="{StaticResource GridBackground}">
         <Label Text="Lebensmittel hinzufügen" FontSize="{StaticResource FontLarge}" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,1" Grid.Row="0" Grid.ColumnSpan="2"/>
         <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="20,10,20,20" Stroke="Black" StrokeThickness="3" BackgroundColor="#dedede">
-            <Grid RowDefinitions="auto, auto,auto,auto" RowSpacing="10" Margin="20">
-                <Entry Placeholder="Lebensmittel" Text="{Binding Kategorie}" Grid.Row="0"/>
-                <Entry Placeholder="Menge" Text="{Binding Menge}" Grid.Row="1"/>
-                <Entry Placeholder="Mengeneinheit" Text="{Binding Unit}" Grid.Row="2"/>
-                <Entry Placeholder="Barcode" Text="{Binding EANCode}" Grid.Row="3"/>
+            <Grid RowDefinitions="auto,auto,auto,auto" RowSpacing="10" Margin="20">
+                <Entry Placeholder="Lebensmittel" Text="{Binding Kategorie}" Grid.Row="0" PlaceholderColor="#aa454545"/>
+                <Entry Placeholder="Menge" Text="{Binding Menge}" Grid.Row="1" PlaceholderColor="#aa454545"/>
+                <Entry Placeholder="Mengeneinheit" Text="{Binding Unit}" Grid.Row="2" PlaceholderColor="#aa454545"/>
+                <Entry Placeholder="Barcode (optional)" Text="{Binding EANCode}" Grid.Row="3" PlaceholderColor="#aa454545"/>
             </Grid>
         </Border>
         <Button Command="{Binding CMD_Accept}" Text="Speichern" Style="{StaticResource ButtonSubmitMain}" FontSize="{StaticResource FontLarge}" Grid.Row="2" Grid.Column="0" Margin="20,0,5,20"/>
