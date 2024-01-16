@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Rezeptify"
              xmlns:vm="clr-namespace:Rezeptify.VM;assembly=Rezeptify.VM"
              x:Class="Rezeptify.StartPage"
              Shell.NavBarIsVisible="False"
              NavigationPage.HasNavigationBar="False"
              Title="StartPage">
+    <ContentPage.Resources>
+        <local:ShowMengeConverter x:Key="MengeCon"/>
+    </ContentPage.Resources>
 
     <Grid Style="{StaticResource GridBackground}">
         <Button Text="Lebensmittel" FontSize="{StaticResource FontMedium}" Grid.Row="0"  Grid.Column="0" BackgroundColor="#696969"/>
@@ -22,7 +26,7 @@
                     <DataTemplate>
                         <Grid ColumnDefinitions="2*, *">
                             <Label FontSize="{StaticResource FontSmall}" Text="{Binding Name}" Grid.Column="0" Margin="20, 0, 20, 10" LineBreakMode="TailTruncation"/>
-                            <Label FontSize="{StaticResource FontSmall}" Text="{Binding Quantity}" Grid.Column="1" HorizontalOptions="Center" Margin="20, 0, 20, 10"/>
+                            <Label FontSize="{StaticResource FontSmall}" Text="{Binding .,Converter={StaticResource MengeCon}}" Grid.Column="1" HorizontalOptions="End" Margin="20, 0, 20, 10"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
