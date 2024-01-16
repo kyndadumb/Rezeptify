@@ -105,7 +105,7 @@ namespace Rezeptify.AppComponents
                 ing_insert.ExecuteNonQuery();
 
                 // max Ingredient_ID holen => aktuell hinzugefügte Zutat
-                SqliteCommand ing_id_select = new("SELECT MAX(ingredient_id) from ingredients");
+                SqliteCommand ing_id_select = new("SELECT MAX(id) from ingredients",conn);
                 SqliteDataReader reader = ing_id_select.ExecuteReader();
 
                 if (reader.Read()) { ingredient_id = reader.GetInt32(0); }
