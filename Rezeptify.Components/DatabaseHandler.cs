@@ -10,8 +10,7 @@ namespace Rezeptify.AppComponents
         public static SqliteConnection OpenDatabaseConnection()
         {
             IFileManager? service = Components.GetService<IFileManager>();
-            string appdata_path = Path.Combine(service.GetAppDataDir(), "Rezeptify");
-            string databasePath = Path.Combine(appdata_path, "rezeptify.db");
+            string databasePath = Path.Combine(service.GetApplicationFolder(), "rezeptify.db");
 
             // Variablen
             SqliteConnection conn = null;
