@@ -32,6 +32,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Border>
+        <Button Text="?" Command="{Binding CMD_Help}" Grid.Row="1" Grid.Column="1" VerticalOptions="End" HorizontalOptions="End" WidthRequest="45" CornerRadius="45" Margin="0,0,30,30"/>
         <Button Style="{StaticResource ButtonSubmitMain}" FontSize="{StaticResource FontLarge}" Text="Lebensmittel hinzufügen" Grid.Row="2" Grid.ColumnSpan="2" Command="{Binding CMD_ShowPopUp}"/>
     </Grid>
 

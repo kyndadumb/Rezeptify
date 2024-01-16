@@ -98,6 +98,9 @@
 		<MauiXaml Update="Pages\BarcodePage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Pages\HelpPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Pages\RecipePage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

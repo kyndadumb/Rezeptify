@@ -13,6 +13,7 @@ public class StartVM : ViewModelBase
         //this.CMD_ShowBarcode = new ActionCommand(ShowScanPage);
         this.CMD_ShowRecipe = new ActionCommand(ShowRecipePage);
         this.CMD_ShowPopUp = new ActionCommand(ShowAddFoodPopUpPage);
+        this.CMD_Help = new ActionCommand(ShowHelpPage);
         //TestCollection();
 
         LoadIngredients();
@@ -66,6 +67,12 @@ public class StartVM : ViewModelBase
         _viewManager.Show(vm, false);
     }
 
+    private void ShowHelpPage()
+    {
+        var vm = new HelpVM(this);
+        _viewManager.Show(vm, false);
+    }
+
     public ObservableCollection<Ingredients> IngredientsCollection { get; set; } = [];
 
 
@@ -76,4 +83,6 @@ public class StartVM : ViewModelBase
     public ActionCommand CMD_ShowRecipe { get; set; }
 
     public ActionCommand CMD_ShowPopUp { get; set; }
+
+    public ActionCommand CMD_Help { get; set; }
 }
