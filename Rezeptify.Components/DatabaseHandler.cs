@@ -94,21 +94,46 @@ public static class DatabaseHandler
     {
         // Variablen
         int? ingredient_id = null;
+        string name_availiable = null;
+        string unit_availiable = null;
         
         try
         {
-            // Lebensmittel hinzufügen
-            SqliteCommand ing_insert = new("INSERT INTO ingredients (name, quantity, unit) VALUES (@name, @quantity, @unit)",conn);
-            ing_insert.Parameters.AddWithValue("@name", name);
-            ing_insert.Parameters.AddWithValue("@quantity", Math.Round(quantity, 2));
-            ing_insert.Parameters.AddWithValue("@unit", unit);
-            await ing_insert.ExecuteNonQueryAsync();
+            // Prüfen ob das selbe Produkt aktuell in der Datenbank ist
+            SqliteCommand test_available = new("SELECT name, unit FROM ingredients WHERE name = @name AND (SELECT eancode from eancodes WHERE eancode = @ean)", conn);
+            test_available.Parameters.AddWithValue("@name", name);
+            test_available.Parameters.AddWithValue("@ean", ean);
+            SqliteDataReader avail_reader = test_available.ExecuteReader();
 
-            // max Ingredient_ID holen => aktuell hinzugefügte Zutat
-            SqliteCommand ing_id_select = new("SELECT MAX(id) from ingredients",conn);
-            SqliteDataReader reader = await ing_id_select.ExecuteReaderAsync();
+            while (avail_reader.Read())
+            {
+                name_availiable = avail_reader.GetString(0);
+                unit_availiable = avail_reader.GetString(1);
+            }
 
-            if (reader.Read()) { ingredient_id = reader.GetInt32(0); }
+            // if - Produkt ist vorhanden => Nur die Menge addieren
+            if (name_availiable != null && unit_availiable == unit)
+            {
+                SqliteCommand update_menge = new("UPDATE ingredients SET quantity = quantity + @menge_neu WHERE name = @name", conn);
+                update_menge.Parameters.AddWithValue("@menge_neu", quantity);
+                update_menge.Parameters.AddWithValue("@name", name);
+                await update_menge.ExecuteNonQueryAsync();
+            }
+
+            else
+            {
+                // Lebensmittel hinzufügen
+                SqliteCommand ing_insert = new("INSERT INTO ingredients (name, quantity, unit) VALUES (@name, @quantity, @unit)", conn);
+                ing_insert.Parameters.AddWithValue("@name", name);
+                ing_insert.Parameters.AddWithValue("@quantity", Math.Round(quantity, 2));
+                ing_insert.Parameters.AddWithValue("@unit", unit);
+                await ing_insert.ExecuteNonQueryAsync();
+
+                // max Ingredient_ID holen => aktuell hinzugefügte Zutat
+                SqliteCommand ing_id_select = new("SELECT MAX(id) from ingredients", conn);
+                SqliteDataReader reader = await ing_id_select.ExecuteReaderAsync();
+
+                if (reader.Read()) { ingredient_id = reader.GetInt32(0); }
 
                 if (ingredient_id != null && !string.IsNullOrWhiteSpace(ean))
                 {
@@ -120,6 +145,8 @@ public static class DatabaseHandler
                     await ean_insert.ExecuteNonQueryAsync();
                 }
             }
+        }
+
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);

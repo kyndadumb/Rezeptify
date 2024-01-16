@@ -7,7 +7,7 @@ namespace Rezeptify.AppComponents
 {
     public class ChefGPTHandler
     {
-        private string API_KEY = "24a52c5f-2007-4e4c-ba5d-d8d1cf93c0a2";
+        private string API_KEY = "API_KEY";
         private string BASE_URL = "https://api.chefgpt.com/";
         private readonly HttpClient _httpClient;
 
