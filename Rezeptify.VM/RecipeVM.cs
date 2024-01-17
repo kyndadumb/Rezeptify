@@ -19,20 +19,24 @@ namespace Rezeptify.VM
             SqliteConnection sqliteConnection = DatabaseHandler.OpenDatabaseConnection();
             List<Ingredients> list = DatabaseHandler.LoadIngredients(sqliteConnection);
 
-            foreach (Ingredients ing in list) { IngredientsCollection.Add(ing); }
+            IngredientsCollection.Clear();
+            foreach (Ingredients ing in list)
+            {
+                IngredientsCollection.Add(ing);
+            }
         }
 
         private void ShowRecipeResultPage()
         {
-            var ingredients = ConvertSelectedCollection();
-            var vm = new RecipeResultVM(this,ingredients);
+            Ingredients[]? ingredients = ConvertSelectedCollection();
+            RecipeResultVM vm = new RecipeResultVM(this,ingredients);
             _viewManager.Show(vm);
         }
 
         private Ingredients[] ConvertSelectedCollection()
         {
             List<Ingredients> list = [];
-            foreach (var ingr in SelectedIngredientCollection)
+            foreach (object? ingr in SelectedIngredientCollection)
             {
                 list.Add((Ingredients)ingr);
             }
@@ -41,7 +45,7 @@ namespace Rezeptify.VM
 
         private void ShowStartPage()
         {
-            var vm = new StartVM();
+            StartVM vm = new StartVM();
             _viewManager.Show(vm,false);
         }
         public ObservableCollection<Ingredients> IngredientsCollection { get; set; } = [];

@@ -1,10 +1,6 @@
-﻿using Rezeptify.AppComponents.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DeepL;
 using Rezeptify.AppComponents;
+using Rezeptify.AppComponents.Models;
 
 namespace Rezeptify.VM
 {
@@ -21,13 +17,40 @@ namespace Rezeptify.VM
 
         public override async Task OnShow()
         {
-            await ChefGPTHandler.RequestRecipe();
+            await CreateRecipe(_ingredients);
             await base.OnShow();
         }
 
         private void BackToRecipe()
         {
             _viewManager.Show(_backVM);
+        }
+
+        private async Task CreateRecipe(Ingredients[] selected_ingredients)
+        {
+            InstructionsText = "";
+            try
+            {
+                ChefGPTHandler chefGPTHandler = new();
+                Translator translator = new("");
+                RecipeRequest recipe_request = await chefGPTHandler.CreateRecipieRequest(selected_ingredients, null, null, null, null, null, translator);
+                string recipe = await chefGPTHandler.RequestRecipe(recipe_request);
+                string instructions = chefGPTHandler.ExtractInstructionSet(recipe);
+                string instructions_deutsch = await DeepLHandler.TranslateInstructions(translator, instructions, "DE-DE");
+                InstructionsText = instructions_deutsch;
+            }
+            catch (Exception ex) 
+            {
+                InstructionsText = ex.Message;
+            }
+        }
+
+        private string _InstructionsText;
+
+        public string InstructionsText
+        {
+            get { return _InstructionsText; }
+            set { _InstructionsText = value; NotifyPropertyChanged(); }
         }
 
         public ActionCommand CMD_Back { get; set; } 

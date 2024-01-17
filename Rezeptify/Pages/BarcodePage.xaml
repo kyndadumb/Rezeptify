@@ -11,7 +11,7 @@
         <local:BarcodeEventArgsConverter x:Key="BarcodeCon"/>
     </ContentPage.Resources>
     <Grid RowDefinitions="Auto,Auto,*,Auto">
-        <zxing:CameraBarcodeReaderView x:Name="cameraBarcodeReaderView" Grid.Row="0" IsTorchOn="{Binding TorchEnabled}">
+        <zxing:CameraBarcodeReaderView x:Name="cameraBarcodeReaderView" Grid.Row="0" IsTorchOn="{Binding TorchEnabled}" IsDetecting="{Binding ScanEnabled}">
             <zxing:CameraBarcodeReaderView.Behaviors>
                 <toolkit:EventToCommandBehavior EventName="BarcodesDetected" Command="{Binding CMD_BarcodeScanned}" EventArgsConverter="{StaticResource BarcodeCon}"/>
             </zxing:CameraBarcodeReaderView.Behaviors>
