@@ -12,8 +12,8 @@
     </ContentPage.Resources>
 
     <Grid Style="{StaticResource GridBackground}">
-        <Button Text="Lebensmittel" Command="{Binding CMD_StartPage}" FontSize="{StaticResource FontMedium}" Grid.Row="0"  Grid.Column="0" BackgroundColor="#454545" BorderColor="Black" BorderWidth="2.5"/>
-        <Button Text="Rezepte" FontSize="{StaticResource FontMedium}" Grid.Row="0" Grid.Column="1" BackgroundColor="#696969"/>
+        <Button Text="Lebensmittel" Command="{Binding CMD_StartPage}" FontSize="{StaticResource FontMedium}" Grid.Row="0"  Grid.Column="0" BackgroundColor="#454545" BorderColor="Black" BorderWidth="2.5" TextColor="White"/>
+        <Button Text="Rezepte" FontSize="{StaticResource FontMedium}" Grid.Row="0" Grid.Column="1" BackgroundColor="#696969" TextColor="White"/>
         <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="20" Stroke="Black" StrokeThickness="3">
             <Grid RowDefinitions="*,50" BackgroundColor="#dedede">
                 <CollectionView ItemsSource="{Binding IngredientsCollection}" SelectionMode="Multiple" SelectedItems="{Binding SelectedIngredientCollection}" Grid.Row="0">
