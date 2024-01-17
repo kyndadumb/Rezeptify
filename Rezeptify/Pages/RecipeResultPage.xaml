@@ -12,7 +12,7 @@
             <Grid>
                 <ActivityIndicator IsVisible="{Binding InstructionsText,Converter={toolkit:IsStringNullOrWhiteSpaceConverter}}"/>
                 <Border Margin="20,10,20,20" Stroke="Black" StrokeThickness="3" BackgroundColor="#dedede" IsVisible="{Binding InstructionsText,Converter={toolkit:IsStringNotNullOrWhiteSpaceConverter}}">
-                    <Label Text="{Binding InstructionsText}" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" FontSize="{StaticResource FontMedium}"/>
+                    <Label Text="{Binding InstructionsText}" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" FontSize="{StaticResource FontMedium}" Margin="20"/>
                 </Border>
             </Grid>
         </ScrollView>
