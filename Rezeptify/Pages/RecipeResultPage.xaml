@@ -7,11 +7,11 @@
              NavigationPage.HasNavigationBar="False">
     <Grid Style="{StaticResource GridBackground}">
         <Label Text="Ihr Rezept" TextColor="White" FontSize="{StaticResource FontLarge}" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,1" Grid.Row="0" Grid.ColumnSpan="2"/>
-        <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="20,10,20,20" Stroke="Black" StrokeThickness="3" BackgroundColor="#dedede">
-            <Grid RowDefinitions="*" Margin="20">
+        <ScrollView Grid.Row="1" Grid.ColumnSpan="2" >
+            <Border Margin="20,10,20,20" Stroke="Black" StrokeThickness="3" BackgroundColor="#dedede">
                 <Label Text="{Binding InstructionsText}" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" FontSize="{StaticResource FontMedium}"/>
-            </Grid>            
-        </Border>
+            </Border>
+        </ScrollView>
         <Button Command="{Binding CMD_Back}" Style="{StaticResource ButtonSubmitMain}" BackgroundColor="#ff6666" FontSize="{StaticResource FontLarge}" Text="Rezept schließen" Grid.Row="2" Grid.ColumnSpan="2"/>
     </Grid>
 </ContentPage>
