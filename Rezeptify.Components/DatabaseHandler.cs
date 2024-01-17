@@ -35,12 +35,12 @@ public static class DatabaseHandler
             create_ingredients.CommandText = "CREATE TABLE IF NOT EXISTS ingredients (id INTEGER NOT NULL, name TEXT NOT NULL, quantity REAL NULL, unit VARCHAR(50) NULL, PRIMARY KEY (id));";
             create_ingredients.ExecuteNonQuery();
 
-            SqliteCommand create_recipeingredients = conn.CreateCommand();
-            create_recipeingredients.CommandText = "CREATE TABLE IF NOT EXISTS recipeingredients (recipe_id INTEGER NOT NULL, ingredient_id INTEGER NOT NULL, CONSTRAINT '0' FOREIGN KEY (ingredient_id) REFERENCES ingredients (id) ON UPDATE NO ACTION ON DELETE NO ACTION, CONSTRAINT '1' FOREIGN KEY (recipe_id) REFERENCES recipe (id) ON UPDATE NO ACTION ON DELETE NO ACTION);";
-            create_recipeingredients.ExecuteNonQuery();
+            //SqliteCommand create_recipeingredients = conn.CreateCommand();
+            //create_recipeingredients.CommandText = "CREATE TABLE IF NOT EXISTS recipeingredients (recipe_id INTEGER NOT NULL, ingredient_id INTEGER NOT NULL, CONSTRAINT '0' FOREIGN KEY (ingredient_id) REFERENCES ingredients (id) ON UPDATE NO ACTION ON DELETE NO ACTION, CONSTRAINT '1' FOREIGN KEY (recipe_id) REFERENCES recipe (id) ON UPDATE NO ACTION ON DELETE NO ACTION);";
+            //create_recipeingredients.ExecuteNonQuery();
 
             SqliteCommand create_eancodes = conn.CreateCommand();
-            create_eancodes.CommandText = "CREATE TABLE IF NOT EXISTS eancodes ( id INTEGER NOT NULL, eancode VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, ingredient_id INTEGER NOT NULL, PRIMARY KEY (id), CONSTRAINT '0' FOREIGN KEY (ingredient_id) REFERENCES ingredients (id) ON UPDATE NO ACTION ON DELETE NO ACTION);";
+            create_eancodes.CommandText = "CREATE TABLE IF NOT EXISTS eancodes ( id INTEGER NOT NULL, eancode VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY (id));";
             create_eancodes.ExecuteNonQuery();
         }
 
@@ -96,6 +96,7 @@ public static class DatabaseHandler
         int? ingredient_id = null;
         string name_availiable = null;
         string unit_availiable = null;
+        bool already_added = false;
 
         try
         {
@@ -123,10 +124,11 @@ public static class DatabaseHandler
                     update_menge.Parameters.AddWithValue("@menge_neu", quantity);
                     update_menge.Parameters.AddWithValue("@name", name);
                     await update_menge.ExecuteNonQueryAsync();
+                    already_added = true;
                 }
             }
 
-            else
+            if (!already_added)
             {
                 // Lebensmittel hinzufügen
                 SqliteCommand ing_insert = new("INSERT INTO ingredients (name, quantity, unit) VALUES (@name, @quantity, @unit)", conn);
@@ -144,9 +146,8 @@ public static class DatabaseHandler
                 if (ingredient_id != null && !string.IsNullOrWhiteSpace(ean))
                 {
                     // EAN-Code in die DB schreiben
-                    SqliteCommand ean_insert = new("INSERT INTO eancodes (eancode, ingredient_id, name) VALUES (@eancode, @ingredient_id, @name)", conn);
+                    SqliteCommand ean_insert = new("INSERT INTO eancodes (eancode, name) VALUES (@eancode, @name)", conn);
                     ean_insert.Parameters.AddWithValue("@eancode", ean);
-                    ean_insert.Parameters.AddWithValue("@ingredient_id", ingredient_id);
                     ean_insert.Parameters.AddWithValue("@name", name);
                     await ean_insert.ExecuteNonQueryAsync();
                 }
@@ -192,6 +193,11 @@ public static class DatabaseHandler
     {
         foreach (Ingredients ingredient in ingredients)
         {
+            // Zuerst alle abhängigen Einträge in recipeingredients löschen
+            //SqliteCommand deleteRecipeIngredients = new("DELETE FROM recipeingredients WHERE ingredient_id = @ingredientId", conn);
+            //deleteRecipeIngredients.Parameters.AddWithValue("@ingredientId", ingredient.Id);
+            //deleteRecipeIngredients.ExecuteNonQuery();
+
             SqliteCommand cmd = new("DELETE FROM ingredients where id = @id", conn);
             cmd.Parameters.AddWithValue("@id", ingredient.Id);
             cmd.ExecuteNonQuery();
