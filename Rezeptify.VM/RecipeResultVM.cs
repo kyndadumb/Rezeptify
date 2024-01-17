@@ -8,38 +8,51 @@ namespace Rezeptify.VM
     {
         private ViewModelBase _backVM;
         private Ingredients[] _ingredients = [];
-        public RecipeResultVM(ViewModelBase backVM, Ingredients[] ingredients)
+        private int _portionen;
+        public RecipeResultVM(ViewModelBase backVM, Ingredients[] ingredients, int portions = 1)
         {
             _ingredients = ingredients;
             _backVM = backVM;
-            CMD_Back = new ActionCommand(BackToRecipe);
+            _portionen = portions;
+            CMD_Back = new TaskCommand(BackToRecipe);
         }
 
         public override async Task OnShow()
         {
-            await CreateRecipe(_ingredients);
+            await CreateRecipe();
             await base.OnShow();
         }
 
-        private void BackToRecipe()
+        private async Task BackToRecipe()
         {
+            var shouldClose = await _viewManager.MessageBoxAsyncYesNo("Rezept Schließen?", "Soll das Rezept wirklich geschlossen werden?");
+            if (!shouldClose) return;
+            var removeUsedIngredients = await _viewManager.MessageBoxAsyncYesNo("", "Sollen die benutzen Zutaten von der Zutatenliste entfernt werden?");
+            if (removeUsedIngredients)
+            {
+                //Zutaten entfernen
+                using (var conn = DatabaseHandler.OpenDatabaseConnection())
+                {
+                    DatabaseHandler.DeleteIngredient(_ingredients, conn);
+                }
+            }
             _viewManager.Show(_backVM);
         }
 
-        private async Task CreateRecipe(Ingredients[] selected_ingredients)
+        private async Task CreateRecipe()
         {
             InstructionsText = "";
             try
             {
-                ChefGPTHandler chefGPTHandler = new();
-                Translator translator = new("ec61c033-fbcc-4e92-d7ac-cc39ca3cf507:fx");
-                RecipeRequest recipe_request = await chefGPTHandler.CreateRecipeRequest(selected_ingredients, null, null, null, null, null, translator, "Metric");
-                string recipe = await chefGPTHandler.RequestRecipe(recipe_request);
-                string instructions = chefGPTHandler.ExtractInstructionSet(recipe);
-                string instructions_deutsch = await DeepLHandler.TranslateInstructions(translator, instructions, "DE-DE");
-                InstructionsText = instructions_deutsch;
+                //ChefGPTHandler chefGPTHandler = new();
+                //Translator translator = new("ec61c033-fbcc-4e92-d7ac-cc39ca3cf507:fx");
+                //RecipeRequest recipe_request = await chefGPTHandler.CreateRecipeRequest(_ingredients, null, null, null, null, null, translator, "Metric");
+                //string recipe = await chefGPTHandler.RequestRecipe(recipe_request);
+                //string instructions = chefGPTHandler.ExtractInstructionSet(recipe);
+                //string instructions_deutsch = await DeepLHandler.TranslateInstructions(translator, instructions, "DE-DE");
+                //InstructionsText = instructions_deutsch;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 InstructionsText = ex.Message;
             }
@@ -53,6 +66,6 @@ namespace Rezeptify.VM
             set { _InstructionsText = value; NotifyPropertyChanged(); }
         }
 
-        public ActionCommand CMD_Back { get; set; } 
+        public TaskCommand CMD_Back { get; set; }
     }
 }

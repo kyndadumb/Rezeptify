@@ -26,10 +26,19 @@ namespace Rezeptify.VM
             }
         }
 
+        private int _Portionen = 1;
+
+        public int Portionen
+        {
+            get { return _Portionen; }
+            set { _Portionen = value; NotifyPropertyChanged(); }
+        }
+
+
         private void ShowRecipeResultPage()
         {
             Ingredients[]? ingredients = ConvertSelectedCollection();
-            RecipeResultVM vm = new RecipeResultVM(this,ingredients);
+            RecipeResultVM vm = new RecipeResultVM(this,ingredients,Portionen);
             _viewManager.Show(vm);
         }
 

@@ -138,12 +138,12 @@ public class ViewManager : IViewManager
     {
         await _rootPage.DisplayAlert(title, msg, btnText);
     }
-    public async Task MessageBoxAsyncYesNo(string title, string msg)
+    public async Task<bool> MessageBoxAsyncYesNo(string title, string msg)
     {
-        await _rootPage.DisplayAlert(title, msg, "Ja", "Nein");
+        return await _rootPage.DisplayAlert(title, msg, "Ja", "Nein");
     }
-    public async Task MessageBoxAsyncYesNoCustom(string title, string msg, string yes, string no)
+    public async Task<bool> MessageBoxAsyncYesNoCustom(string title, string msg, string yes, string no)
     {
-        await _rootPage.DisplayAlert(title, msg, yes, no);
+        return await _rootPage.DisplayAlert(title, msg, yes, no);
     }
 }
