@@ -18,7 +18,7 @@ namespace Rezeptify.AppComponents
         }
 
         // RecipeRequest erstellen
-        public async Task<RecipeRequest> CreateRecipeRequest(Ingredients[] ingredients, string? mealtype, List<string> kitchen_tools, int? prep_time, int? servings, string? difficulty, string measurement = "Metric",  Translator translator)
+        public async Task<RecipeRequest> CreateRecipeRequest(Ingredients[] ingredients, string? mealtype, List<string> kitchen_tools, int? prep_time, int? servings, string? difficulty, Translator translator, string measurement = "Metric")
         {
             RecipeRequest result = new();
 
