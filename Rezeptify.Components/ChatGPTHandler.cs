@@ -19,10 +19,10 @@ public class ChatGPTHandler
 
         foreach (Ingredients ing in ingredients)
         {
-            text_ingredients += ing.Name.ToString() + " " + ing.Quantity.ToString() + " " + ing.Unit.ToString();
+            text_ingredients += ing.Quantity.ToString() + ing.Unit.ToString() + " " +  ing.Name.ToString() + " ";
         }
         
-        string prompt = $"Bitte erstelle ein Rezept aus {text_ingredients}. " +
+        string prompt = $"Bitte erstelle ein Rezept aus {text_ingredients.TrimEnd()}. " +
             $"Du musst nicht alle Zutaten nutzen, aber auch keine anderen Zutaten dazudichten." +
             $"Das Rezept soll für {portionen} Portionen reichen" +
             $"Gib nur einen Text mit den Instruktionen zum Kochen zurück";

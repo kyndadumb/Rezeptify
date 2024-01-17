@@ -45,8 +45,8 @@ namespace Rezeptify.VM
             InstructionsText = "";
             try
             {
-                ChatGpt chatgpt = ChatGPTHandler.CreateBot("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");
-                InstructionsText = await ChatGPTHandler.AskForRecipe(chatgpt, selected_ingredients, );
+                ChatGpt chatgpt = ChatGPTHandler.CreateBot("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");
+                InstructionsText = await ChatGPTHandler.AskForRecipe(chatgpt,_ingredients, _portionen);
             }
             catch (Exception ex)
             {
