@@ -2,6 +2,7 @@
 using System.Net.Http.Headers;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using DeepL;
 
 namespace Rezeptify.AppComponents
 {
@@ -17,11 +18,13 @@ namespace Rezeptify.AppComponents
         }
 
         // RecipeRequest erstellen
-        public RecipeRequest CreateRecipieRequest(Ingredients[] ingredients, string? mealtype, List<string> kitchen_tools, int? prep_time, int? servings, string? difficulty)
+        public async Task<RecipeRequest> CreateRecipieRequest(Ingredients[] ingredients, string? mealtype, List<string> kitchen_tools, int? prep_time, int? servings, string? difficulty, Translator translator)
         {
             RecipeRequest result = new();
 
             foreach (Ingredients ing in ingredients) { result.Ingredients.Add(ing.Name.ToString() + " " + ing.Quantity + " " + ing.Unit); }
+            result.Ingredients = await DeepLHandler.TranslateIngredient(translator, result.Ingredients, "EN-US");
+            
             if (mealtype != null) { result.MealType = mealtype; }
             if (kitchen_tools != null)
             {

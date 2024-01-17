@@ -1,4 +1,5 @@
-﻿using Rezeptify.AppComponents;
+﻿using DeepL;
+using Rezeptify.AppComponents;
 using Rezeptify.AppComponents.Models;
 
 namespace Rezeptify.VM
@@ -31,10 +32,12 @@ namespace Rezeptify.VM
             try
             {
                 ChefGPTHandler chefGPTHandler = new();
-                RecipeRequest recipe_request = chefGPTHandler.CreateRecipieRequest(selected_ingredients, null, null, null, null, null);
+                Translator translator = new("");
+                RecipeRequest recipe_request = await chefGPTHandler.CreateRecipieRequest(selected_ingredients, null, null, null, null, null, translator);
                 string recipe = await chefGPTHandler.RequestRecipe(recipe_request);
                 string instructions = chefGPTHandler.ExtractInstructionSet(recipe);
-                InstructionsText = instructions;
+                string instructions_deutsch = await DeepLHandler.TranslateInstructions(translator, instructions, "DE-DE");
+                InstructionsText = instructions_deutsch;
             }
             catch (Exception ex) 
             {
