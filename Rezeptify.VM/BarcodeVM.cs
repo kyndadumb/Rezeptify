@@ -29,6 +29,7 @@ public class BarcodeVM : ViewModelBase
             if (String.IsNullOrWhiteSpace(scannedCode)) return;
             ScanEnabled = false;
             ErrorText = scannedCode;
+            TorchEnabled = false;
 
             //Produktkategorie für Code raussuchen
             string cat = SearchLocalDBforEAN(scannedCode); //in der lokalen Datenbank nach Code gucken
