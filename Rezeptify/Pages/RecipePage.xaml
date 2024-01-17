@@ -15,22 +15,28 @@
         <Button Text="Lebensmittel" Command="{Binding CMD_StartPage}" FontSize="{StaticResource FontMedium}" Grid.Row="0"  Grid.Column="0" BackgroundColor="#454545" BorderColor="Black" BorderWidth="2.5"/>
         <Button Text="Rezepte" FontSize="{StaticResource FontMedium}" Grid.Row="0" Grid.Column="1" BackgroundColor="#696969"/>
         <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="20" Stroke="Black" StrokeThickness="3">
-            <CollectionView BackgroundColor="#dedede" ItemsSource="{Binding IngredientsCollection}" SelectionMode="Multiple" SelectedItems="{Binding SelectedIngredientCollection}">
-                <CollectionView.Header>
-                    <Grid ColumnDefinitions="2*,*">
-                        <Label FontSize="{StaticResource FontMedium}" Text="Bezeichnung" Grid.Column="0" VerticalOptions="Center" Margin="20,15"/>
-                        <Label FontSize="{StaticResource FontMedium}" Text="Menge" Grid.Column="1" VerticalOptions="Center" Margin="20,15"/>
-                    </Grid>
-                </CollectionView.Header>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ColumnDefinitions="2*, *">
-                            <Label FontSize="{StaticResource FontSmall}" Text="{Binding Name}" Grid.Column="0" Margin="20, 0, 20, 10" LineBreakMode="TailTruncation" VerticalOptions="Center"/>
-                            <Label FontSize="{StaticResource FontSmall}" Text="{Binding .,Converter={StaticResource MengeCon}}" Grid.Column="1" HorizontalOptions="End"  VerticalOptions="Center" Margin="20, 0, 20, 10"/>
+            <Grid RowDefinitions="*,50" BackgroundColor="#dedede">
+                <CollectionView ItemsSource="{Binding IngredientsCollection}" SelectionMode="Multiple" SelectedItems="{Binding SelectedIngredientCollection}" Grid.Row="0">
+                    <CollectionView.Header>
+                        <Grid ColumnDefinitions="2*,*">
+                            <Label FontSize="{StaticResource FontMedium}" Text="Bezeichnung" Grid.Column="0" VerticalOptions="Center" Margin="20,15"/>
+                            <Label FontSize="{StaticResource FontMedium}" Text="Menge" Grid.Column="1" VerticalOptions="Center" Margin="20,15"/>
                         </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                    </CollectionView.Header>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="2*, *">
+                                <Label FontSize="{StaticResource FontSmall}" Text="{Binding Name}" Grid.Column="0" Margin="20, 0, 20, 10" LineBreakMode="TailTruncation" VerticalOptions="Center"/>
+                                <Label FontSize="{StaticResource FontSmall}" Text="{Binding .,Converter={StaticResource MengeCon}}" Grid.Column="1" HorizontalOptions="End"  VerticalOptions="Center" Margin="20, 0, 20, 10"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Grid ColumnDefinitions="2*,*" Grid.Row="1">
+                    <Label Text="Portionen:" Grid.Column="0" VerticalOptions="Center" Margin="20,0" FontSize="{StaticResource FontSmall}"/>
+                    <Entry Keyboard="Numeric" Placeholder="0" Grid.Column="1" Margin="20,0" ReturnType="Next" FontSize="{StaticResource FontSmall}"/>
+                </Grid>
+            </Grid>
         </Border>
         <Button Style="{StaticResource ButtonSubmitMain}" FontSize="{StaticResource FontLarge}" Text="Rezept erstellen" Grid.Row="2" Grid.ColumnSpan="2" Command="{Binding CMD_Result}"/>
     </Grid>
