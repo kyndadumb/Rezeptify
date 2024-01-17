@@ -1,7 +1,5 @@
 ﻿using ChatGPT.Net;
-using DeepL;
 using Rezeptify.AppComponents;
-using Rezeptify.AppComponents.Models;
 
 namespace Rezeptify.VM
 {
