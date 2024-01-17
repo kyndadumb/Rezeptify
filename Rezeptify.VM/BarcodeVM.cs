@@ -60,7 +60,7 @@ public class BarcodeVM : ViewModelBase
 
     private static async Task<string> SearchOpenGTIN(string scannedCode)
     {
-        var gtinHandler = new OpenGTINDBHandler("400000000");
+        var gtinHandler = new OpenGTINDBHandler(APIKeys.OpenGTINDBApiKey);
         var gtinInfo = await gtinHandler.GetProductInformation(scannedCode);
         var cat = gtinHandler.ReturnInfoByCategory(gtinInfo, "name");
         return cat;

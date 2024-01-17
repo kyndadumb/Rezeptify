@@ -362,3 +362,7 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 *.asc
+
+
+Components/APIKeysLocal.cs
+/Rezeptify.Components/APIKeysLocal.cs
