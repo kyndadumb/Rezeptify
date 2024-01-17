@@ -28,7 +28,7 @@ public partial class EntryPoint : ContentPage
         Components.RegisterService(typeof(IFileManager),new FileManager()); 
 
         var dgt = new ViewModelResolver(VMResolver.Resolve);
-        var shell = (Shell)App.Current!.MainPage;
+        Shell shell = (Shell)App.Current!.MainPage!;
         var viewManager = new ViewManager(dgt, shell);
         Components.RegisterService(typeof(IViewManager),viewManager);
     }

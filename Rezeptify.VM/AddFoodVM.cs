@@ -25,7 +25,7 @@ namespace Rezeptify.VM
         {
             if (String.IsNullOrWhiteSpace(Kategorie) || !Menge.HasValue)
             {
-                await _viewManager.MessageBoxAsyncYesNo("Fehler", "Kategorie und Menge sind Pflichtfelder und müssen gefüllt werden!");
+                await _viewManager.MessageBoxAsync("Fehler", "Kategorie und Menge sind Pflichtfelder und müssen gefüllt werden!");
                 return;
             }
 
