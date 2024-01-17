@@ -8,8 +8,8 @@ namespace Rezeptify.AppComponents
 {
     public class ChefGPTHandler
     {
-        private string API_KEY = "API_KEY";
-        private string BASE_URL = "https://api.chefgpt.com/";
+        private string API_KEY = "97bc7d81-0fb3-4589-a1ec-432924716ad0";
+        private string BASE_URL = "https://api.chefgpt.xyz/";
         private readonly HttpClient _httpClient;
 
         public ChefGPTHandler()
@@ -45,17 +45,25 @@ namespace Rezeptify.AppComponents
             string json = System.Text.Json.JsonSerializer.Serialize(request);
             StringContent data = new(json, Encoding.UTF8, "application/json");
 
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", API_KEY);
+            //_httpClient.DefaultRequestHeaders.Add("Authorization", API_KEY);
 
-            string request_url = BASE_URL + "/api/generate/recipe-from-ingredients";
+            string request_url = BASE_URL + "api/generate/recipe-from-ingredients";
 
-            HttpResponseMessage response = await _httpClient.PostAsync(request_url, data);
+            HttpRequestMessage requestMessage = new(HttpMethod.Post, request_url)
+            {
+                Content = data
+            };
+
+            requestMessage.Headers.Add("Authorization", API_KEY);
+
+            HttpResponseMessage response = await _httpClient.SendAsync(requestMessage);
 
             // wurde Statuscode 200 geliefert ?
             if (response.IsSuccessStatusCode)
             {
                 // Antwort auslesen
                 return await response.Content.ReadAsStringAsync();
+                await Console.Out.WriteLineAsync("OK");
             }
 
             return null;

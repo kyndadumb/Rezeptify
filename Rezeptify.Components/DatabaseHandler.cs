@@ -17,8 +17,8 @@ public static class DatabaseHandler
 
         try
         {
-            if (!File.Exists(databasePath)) {File.Create(databasePath);}
-            
+            if (!File.Exists(databasePath)) { File.Create(databasePath); }
+
             conn = new($"Data Source={databasePath}");
 
             conn.Open();
@@ -80,9 +80,9 @@ public static class DatabaseHandler
 
             }
         }
-        catch (Exception ex) 
-        { 
-            Console.WriteLine(ex.Message); 
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
         }
 
         // Liste der Zutaten zurückgeben
@@ -96,31 +96,34 @@ public static class DatabaseHandler
         int? ingredient_id = null;
         string name_availiable = null;
         string unit_availiable = null;
-        
+
         try
         {
             // Prüfen ob eine Menge > 0 hinzugefügt wird
             if (quantity < 0) return;
 
             // Prüfen ob das selbe Produkt aktuell in der Datenbank ist
-            SqliteCommand test_available = new("SELECT name, unit FROM ingredients WHERE name = @name AND (SELECT eancode from eancodes WHERE eancode = @ean)", conn);
-            test_available.Parameters.AddWithValue("@name", name);
-            test_available.Parameters.AddWithValue("@ean", ean);
-            SqliteDataReader avail_reader = test_available.ExecuteReader();
-
-            while (avail_reader.Read())
+            if (!string.IsNullOrEmpty(ean))
             {
-                name_availiable = avail_reader.GetString(0);
-                unit_availiable = avail_reader.GetString(1);
-            }
+                SqliteCommand test_available = new("SELECT name, unit FROM ingredients WHERE name = @name AND (SELECT eancode from eancodes WHERE eancode = @ean)", conn);
+                test_available.Parameters.AddWithValue("@name", name);
+                test_available.Parameters.AddWithValue("@ean", ean);
+                SqliteDataReader avail_reader = test_available.ExecuteReader();
 
-            // if - Produkt ist vorhanden => Nur die Menge addieren
-            if (name_availiable != null && unit_availiable == unit)
-            {
-                SqliteCommand update_menge = new("UPDATE ingredients SET quantity = quantity + @menge_neu WHERE name = @name", conn);
-                update_menge.Parameters.AddWithValue("@menge_neu", quantity);
-                update_menge.Parameters.AddWithValue("@name", name);
-                await update_menge.ExecuteNonQueryAsync();
+                while (avail_reader.Read())
+                {
+                    name_availiable = avail_reader.GetString(0);
+                    unit_availiable = avail_reader.GetString(1);
+                }
+
+                // if - Produkt ist vorhanden => Nur die Menge addieren
+                if (name_availiable != null && unit_availiable == unit)
+                {
+                    SqliteCommand update_menge = new("UPDATE ingredients SET quantity = quantity + @menge_neu WHERE name = @name", conn);
+                    update_menge.Parameters.AddWithValue("@menge_neu", quantity);
+                    update_menge.Parameters.AddWithValue("@name", name);
+                    await update_menge.ExecuteNonQueryAsync();
+                }
             }
 
             else
@@ -150,19 +153,19 @@ public static class DatabaseHandler
             }
         }
 
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
         }
+    }
 
-    //
+    // Produktname anhand der EAN holen
     public static string RetrieveProductNameByEAN(SqliteConnection conn, string ean)
     {
         // Variablen
         string ean_code = string.Empty;
         string name = string.Empty;
-        
+
         try
         {
             // Prüfen ob die EAN vorhanden ist in der lokalen Datenbank vorhanden ist
