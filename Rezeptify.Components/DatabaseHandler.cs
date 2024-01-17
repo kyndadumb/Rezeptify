@@ -185,7 +185,7 @@ public static class DatabaseHandler
     }
 
     // benutzte Produkte aus der Datenbank für den Bestand entfernen
-    public static void DeleteProduct(Ingredients[] ingredients, SqliteConnection conn)
+    public static void DeleteIngredient(Ingredients[] ingredients, SqliteConnection conn)
     {
         foreach (Ingredients ingredient in ingredients)
         {

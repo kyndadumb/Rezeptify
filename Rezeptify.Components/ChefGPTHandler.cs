@@ -18,7 +18,7 @@ namespace Rezeptify.AppComponents
         }
 
         // RecipeRequest erstellen
-        public async Task<RecipeRequest> CreateRecipieRequest(Ingredients[] ingredients, string? mealtype, List<string> kitchen_tools, int? prep_time, int? servings, string? difficulty, Translator translator)
+        public async Task<RecipeRequest> CreateRecipeRequest(Ingredients[] ingredients, string? mealtype, List<string> kitchen_tools, int? prep_time, int? servings, string? difficulty, string measurement = "Metric",  Translator translator)
         {
             RecipeRequest result = new();
 
@@ -34,6 +34,8 @@ namespace Rezeptify.AppComponents
             if (servings != null) { result.Servings = servings; }
             if (difficulty != null) { result.Difficulty = difficulty; }
 
+            result.Measurement = measurement;
+
             return result;
         }
 
@@ -45,7 +47,9 @@ namespace Rezeptify.AppComponents
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", API_KEY);
 
-            HttpResponseMessage response = await _httpClient.PostAsync(BASE_URL, data);
+            string request_url = BASE_URL + "/api/generate/recipe-from-ingredients";
+
+            HttpResponseMessage response = await _httpClient.PostAsync(request_url, data);
 
             // wurde Statuscode 200 geliefert ?
             if (response.IsSuccessStatusCode)

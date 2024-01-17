@@ -8,5 +8,7 @@
         public int? PreparationTime { get; set; }
         public int? Servings { get; set; }
         public string? Difficulty { get; set; }
+
+        public string Measurement { get; set; }
     }
 }
