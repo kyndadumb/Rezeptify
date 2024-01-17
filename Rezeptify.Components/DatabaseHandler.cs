@@ -100,7 +100,7 @@ public static class DatabaseHandler
         try
         {
             // Prüfen ob eine Menge > 0 hinzugefügt wird
-            if (quantity > 0) return;
+            if (quantity < 0) return;
 
             // Prüfen ob das selbe Produkt aktuell in der Datenbank ist
             SqliteCommand test_available = new("SELECT name, unit FROM ingredients WHERE name = @name AND (SELECT eancode from eancodes WHERE eancode = @ean)", conn);
@@ -185,7 +185,7 @@ public static class DatabaseHandler
     }
 
     // benutzte Produkte aus der Datenbank für den Bestand entfernen
-    public static void DeleteProduct(Ingredients[] ingredients, SqliteConnection conn)
+    public static void DeleteIngredient(Ingredients[] ingredients, SqliteConnection conn)
     {
         foreach (Ingredients ingredient in ingredients)
         {

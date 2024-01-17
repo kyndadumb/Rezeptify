@@ -32,8 +32,8 @@ namespace Rezeptify.VM
             try
             {
                 ChefGPTHandler chefGPTHandler = new();
-                Translator translator = new("");
-                RecipeRequest recipe_request = await chefGPTHandler.CreateRecipieRequest(selected_ingredients, null, null, null, null, null, translator);
+                Translator translator = new("ec61c033-fbcc-4e92-d7ac-cc39ca3cf507:fx");
+                RecipeRequest recipe_request = await chefGPTHandler.CreateRecipeRequest(selected_ingredients, null, null, null, null, null, translator, "Metric");
                 string recipe = await chefGPTHandler.RequestRecipe(recipe_request);
                 string instructions = chefGPTHandler.ExtractInstructionSet(recipe);
                 string instructions_deutsch = await DeepLHandler.TranslateInstructions(translator, instructions, "DE-DE");
